@@ -1,0 +1,425 @@
+.team-summary {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.team-summary-chip {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+    padding: 11px 13px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--white);
+}
+
+.team-summary-chip strong {
+    color: var(--frcc-blue);
+    font-size: 1.15rem;
+}
+
+.team-summary-chip span {
+    color: var(--muted);
+    font-size: .76rem;
+    font-weight: 700;
+}
+
+.team-summary-chip.on-duty {
+    border-color: rgba(45, 122, 70, .28);
+    background: #f2faf4;
+}
+
+.team-summary-chip.off-duty {
+    border-color: rgba(104, 113, 136, .25);
+    background: #f6f7f9;
+}
+
+.team-summary-chip.open {
+    border-color: rgba(236, 182, 22, .45);
+    background: #fffaf0;
+}
+
+.team-member-interactive,
+.team-card-interactive {
+    cursor: pointer;
+}
+
+.team-member-interactive {
+    border-radius: 16px;
+    padding: 10px 6px 8px;
+    transition: background .16s ease, box-shadow .16s ease, transform .16s ease;
+}
+
+.team-member-interactive:hover,
+.team-member-interactive:focus-visible {
+    outline: none;
+    background: rgba(255,255,255,.68);
+    box-shadow: 0 0 0 3px rgba(144,186,200,.24);
+}
+
+.team-member-interactive.supervisor:hover,
+.team-member-interactive.supervisor:focus-visible {
+    transform: translateY(-30px) scale(1.095);
+}
+
+.team-member-interactive.tech-iv:hover,
+.team-member-interactive.tech-iv:focus-visible {
+    transform: translateY(-14px) scale(1.015);
+}
+
+.team-member-interactive:not(.supervisor):not(.tech-iv):hover,
+.team-member-interactive:not(.supervisor):not(.tech-iv):focus-visible {
+    transform: translateY(-3px);
+}
+
+.member-loadout {
+    margin-top: 7px;
+    color: var(--frcc-blue);
+    font-size: .7rem;
+    font-weight: 800;
+}
+
+.member-loadout span {
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.open-loadout-label {
+    color: var(--warning);
+}
+
+.member-status {
+    width: fit-content;
+    margin: 6px auto 0;
+    padding: 3px 7px;
+    border-radius: 999px;
+    font-size: .62rem;
+    font-weight: 900;
+    letter-spacing: .04em;
+}
+
+.member-status.status-on-duty,
+.team-card-status.status-on-duty {
+    background: #e8f5ec;
+    color: var(--success);
+}
+
+.member-status.status-off-duty,
+.team-card-status.status-off-duty {
+    background: #eef0f4;
+    color: var(--muted);
+}
+
+.team-loadout-mannequin {
+    isolation: isolate;
+}
+
+.team-loadout-mannequin .head::before {
+    content: "";
+    position: absolute;
+    z-index: 7;
+    left: -3px;
+    right: -3px;
+}
+
+.team-loadout-mannequin.team-has-cap .head::before {
+    top: -6px;
+    height: 13px;
+    border-radius: 10px 10px 3px 3px;
+    background: #213352;
+    box-shadow: 12px 8px 0 -5px #213352;
+}
+
+.team-loadout-mannequin.team-has-beanie .head::before {
+    top: -9px;
+    height: 19px;
+    border-radius: 16px 16px 5px 5px;
+    background: #213352;
+    border-bottom: 3px solid #182640;
+}
+
+.team-loadout-mannequin .torso {
+    overflow: visible;
+}
+
+.team-loadout-mannequin .team-vest,
+.team-loadout-mannequin .team-patch,
+.team-loadout-mannequin .team-mic,
+.team-loadout-mannequin .team-badge,
+.team-loadout-mannequin .team-sleeve-tools,
+.team-loadout-mannequin .team-duty-belt,
+.team-loadout-mannequin .team-belt-gear,
+.team-loadout-mannequin .team-shoe {
+    position: absolute;
+}
+
+.team-loadout-mannequin .team-vest {
+    display: none;
+    left: 17px;
+    right: 17px;
+    top: 15px;
+    bottom: 20px;
+    border-radius: 8px;
+    border: 2px solid rgba(11, 17, 29, .52);
+    background: rgba(20, 26, 38, .22);
+    z-index: 1;
+}
+
+.team-loadout-mannequin.team-has-vest .team-vest {
+    display: block;
+}
+
+.team-loadout-mannequin .team-patch {
+    display: none;
+    width: 11px;
+    height: 13px;
+    right: -5px;
+    top: 28px;
+    border-radius: 5px 5px 7px 7px;
+    background: var(--frcc-gold);
+    border: 1px solid rgba(0,0,0,.25);
+    z-index: 4;
+}
+
+.team-loadout-mannequin.team-has-patch .team-patch {
+    display: block;
+}
+
+.team-loadout-mannequin .team-mic {
+    display: none;
+    width: 8px;
+    height: 13px;
+    left: 19px;
+    top: 22px;
+    border-radius: 3px;
+    background: #111821;
+    z-index: 4;
+}
+
+.team-loadout-mannequin.team-has-mic .team-mic {
+    display: block;
+}
+
+.team-loadout-mannequin .team-badge {
+    display: none;
+    width: 16px;
+    height: 7px;
+    right: 16px;
+    top: 28px;
+    border-radius: 2px;
+    background: #d7dde7;
+    box-shadow: inset 0 0 0 1px #78849a;
+    z-index: 4;
+}
+
+.team-loadout-mannequin.team-has-badge .team-badge {
+    display: block;
+}
+
+.team-loadout-mannequin .team-sleeve-tools {
+    display: none;
+    right: 1px;
+    top: 16px;
+    width: 3px;
+    height: 24px;
+    border-radius: 2px;
+    background: #111820;
+    box-shadow: -4px 2px 0 #202a36, 4px 4px 0 #6b4d2f;
+}
+
+.team-loadout-mannequin.team-has-sleeve-tools .team-sleeve-tools {
+    display: block;
+}
+
+.team-loadout-mannequin .team-duty-belt {
+    left: 18px;
+    top: 153px;
+    width: 76px;
+    height: 9px;
+    border-radius: 5px;
+    background: #171b21;
+    box-shadow: inset 0 0 0 1px #3b414b;
+    z-index: 6;
+}
+
+.team-belt-gear {
+    z-index: 9;
+    width: 10px;
+    height: 14px;
+    border-radius: 3px;
+    background: #1c232d;
+    border: 1px solid rgba(255,255,255,.35);
+    box-shadow: 0 2px 4px rgba(0,0,0,.16);
+}
+
+.team-belt-radio {
+    width: 11px;
+    height: 23px;
+    border-radius: 3px;
+}
+
+.team-belt-radio::before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 9px;
+    left: 3px;
+    top: -8px;
+    background: #12171d;
+    border-radius: 2px;
+}
+
+.team-belt-keys {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid #c59b3b;
+    background: transparent;
+}
+
+.team-belt-access-card {
+    width: 12px;
+    height: 16px;
+    background: #dbe4f0;
+    border-color: #64758e;
+}
+
+.team-belt-flashlight {
+    width: 7px;
+    height: 23px;
+    border-radius: 4px;
+}
+
+.team-belt-gloves,
+.team-belt-tourniquet,
+.team-belt-cpr {
+    background: #222a33;
+}
+
+.team-belt-tourniquet::after,
+.team-belt-cpr::after {
+    content: "+";
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 7px;
+    font-weight: 900;
+}
+
+.team-belt-handcuffs {
+    width: 13px;
+    height: 9px;
+    border-radius: 50%;
+    background: transparent;
+    border: 2px solid #aab2bf;
+}
+
+.team-belt-baton {
+    width: 5px;
+    height: 32px;
+    border-radius: 4px;
+}
+
+.team-belt-pos-12 { left: 51px; top: 148px; }
+.team-belt-pos-1  { left: 63px; top: 150px; }
+.team-belt-pos-2  { left: 73px; top: 154px; }
+.team-belt-pos-3  { left: 84px; top: 158px; }
+.team-belt-pos-4  { left: 88px; top: 164px; }
+.team-belt-pos-5  { left: 79px; top: 168px; }
+.team-belt-pos-6  { left: 52px; top: 170px; }
+.team-belt-pos-7  { left: 26px; top: 168px; }
+.team-belt-pos-8  { left: 16px; top: 164px; }
+.team-belt-pos-9  { left: 12px; top: 158px; }
+.team-belt-pos-10 { left: 23px; top: 154px; }
+.team-belt-pos-11 { left: 36px; top: 150px; }
+
+.team-belt-rear {
+    opacity: .52;
+    filter: saturate(.65);
+}
+
+.team-loadout-mannequin .team-shoe {
+    width: 32px;
+    height: 13px;
+    top: 289px;
+    background: #14171c;
+    border-radius: 7px 9px 4px 4px;
+    z-index: 5;
+}
+
+.team-loadout-mannequin .team-shoe.left {
+    left: 18px;
+}
+
+.team-loadout-mannequin .team-shoe.right {
+    right: 18px;
+}
+
+.team-loadout-mannequin.team-has-boots .team-shoe {
+    height: 22px;
+    top: 280px;
+    border-radius: 6px 7px 4px 4px;
+}
+
+.team-off-duty {
+    filter: saturate(.48) brightness(.96);
+}
+
+.open-team-mannequin {
+    opacity: .72;
+}
+
+.team-card-interactive {
+    transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+
+.team-card-interactive:hover,
+.team-card-interactive:focus-visible {
+    outline: none;
+    transform: translateY(-2px);
+    border-color: var(--frcc-sky);
+    box-shadow: 0 0 0 3px rgba(144,186,200,.18);
+}
+
+.team-card-topline {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 10px;
+}
+
+.team-card-status {
+    flex: 0 0 auto;
+    padding: 3px 7px;
+    border-radius: 999px;
+    font-size: .62rem;
+    font-weight: 900;
+}
+
+.team-card-detail {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: .7rem;
+}
+
+.open-team-card {
+    border-style: dashed;
+    border-color: rgba(236, 182, 22, .55);
+    background: #fffaf0;
+}
+
+@media (max-width: 900px) {
+    .team-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 560px) {
+    .team-summary {
+        grid-template-columns: 1fr;
+    }
+}
