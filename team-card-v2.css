@@ -1,0 +1,713 @@
+/* Build 0.11.1 — Team View operator-card redesign.
+   The target is a polished, character-card presentation: a neutral full-body
+   Campus Safety figure in a natural stance, a soft campus-like background,
+   and a compact information plate beneath the figure. */
+
+#team-view .team-stage {
+    min-height: 560px;
+    padding: 34px 24px 28px;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    background:
+        radial-gradient(circle at 50% 92%, rgba(13,45,108,.10), transparent 28%),
+        linear-gradient(180deg, #f8fbff 0%, #eef3fa 100%);
+}
+
+#team-view .team-lineup {
+    align-items: end;
+    gap: clamp(10px, 1.35vw, 18px);
+    min-width: max-content;
+    padding: 34px 6px 12px;
+}
+
+/* --------------------------------------------------------------------------
+   OPERATOR CARD
+   -------------------------------------------------------------------------- */
+
+#team-view .team-member.operator-card {
+    width: clamp(140px, 10.5vw, 166px);
+    min-width: 140px;
+    padding: 0;
+    border: 1px solid rgba(13,45,108,.14);
+    border-radius: 18px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow:
+        0 13px 30px rgba(13,45,108,.10),
+        0 2px 7px rgba(13,45,108,.07);
+    text-align: left;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    isolation: isolate;
+}
+
+#team-view .team-member.operator-card.team-member-interactive:hover,
+#team-view .team-member.operator-card.team-member-interactive:focus-visible {
+    outline: none;
+    background: #fff;
+    border-color: rgba(144,186,200,.82);
+    box-shadow:
+        0 18px 40px rgba(13,45,108,.15),
+        0 0 0 4px rgba(144,186,200,.16);
+}
+
+#team-view .team-member.operator-card.supervisor {
+    transform: translateY(-24px) scale(1.055);
+    z-index: 5;
+    border-color: rgba(236,182,22,.58);
+    box-shadow:
+        0 17px 38px rgba(13,45,108,.15),
+        0 0 0 2px rgba(236,182,22,.15);
+}
+
+#team-view .team-member.operator-card.supervisor:hover,
+#team-view .team-member.operator-card.supervisor:focus-visible {
+    transform: translateY(-28px) scale(1.07);
+}
+
+#team-view .team-member.operator-card.tech-iv {
+    transform: translateY(-10px);
+    z-index: 4;
+}
+
+#team-view .team-member.operator-card.tech-iv:hover,
+#team-view .team-member.operator-card.tech-iv:focus-visible {
+    transform: translateY(-14px) scale(1.015);
+}
+
+#team-view .team-member.operator-card:not(.supervisor):not(.tech-iv):hover,
+#team-view .team-member.operator-card:not(.supervisor):not(.tech-iv):focus-visible {
+    transform: translateY(-4px);
+}
+
+.operator-card-visual {
+    height: 355px;
+    position: relative;
+    display: grid;
+    place-items: end center;
+    overflow: hidden;
+    background:
+        linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.05)),
+        radial-gradient(circle at 50% 24%, rgba(255,255,255,.72), transparent 27%),
+        linear-gradient(110deg, rgba(95,111,126,.22) 0 12%, transparent 12% 28%, rgba(255,255,255,.36) 28% 42%, transparent 42% 66%, rgba(75,88,99,.18) 66% 77%, transparent 77%),
+        linear-gradient(180deg, #9eabb4 0%, #bdc6cb 34%, #8e9a9f 65%, #6d787c 100%);
+}
+
+.operator-card-visual::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, rgba(255,255,255,.34) 0 7%, transparent 7% 20%, rgba(255,255,255,.17) 20% 24%, transparent 24% 82%, rgba(255,255,255,.22) 82% 88%, transparent 88%),
+        radial-gradient(ellipse at 22% 75%, rgba(63,79,65,.34), transparent 24%),
+        radial-gradient(ellipse at 81% 72%, rgba(86,102,80,.30), transparent 25%);
+    filter: blur(5px);
+    transform: scale(1.04);
+    opacity: .88;
+}
+
+.operator-card-visual::after {
+    content: "";
+    position: absolute;
+    left: 18%;
+    right: 18%;
+    bottom: 6px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(20,30,39,.24);
+    filter: blur(7px);
+}
+
+.operator-loadout-tag {
+    position: absolute;
+    top: 9px;
+    left: 9px;
+    z-index: 20;
+    max-width: calc(100% - 18px);
+    padding: 4px 7px;
+    border-radius: 7px;
+    background: rgba(13,45,108,.86);
+    color: #fff;
+    font-size: .56rem;
+    line-height: 1.15;
+    font-weight: 900;
+    letter-spacing: .045em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: 0 3px 9px rgba(0,0,0,.16);
+}
+
+.operator-rank-tag {
+    position: absolute;
+    right: 9px;
+    top: 9px;
+    z-index: 20;
+    padding: 4px 6px;
+    border-radius: 7px;
+    background: rgba(255,255,255,.84);
+    color: var(--frcc-blue);
+    border: 1px solid rgba(13,45,108,.14);
+    font-size: .54rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .035em;
+}
+
+.operator-info-plate {
+    position: relative;
+    z-index: 22;
+    min-height: 83px;
+    padding: 10px 10px 9px;
+    background: rgba(255,255,255,.98);
+    border-top: 1px solid rgba(13,45,108,.10);
+}
+
+.operator-name {
+    color: var(--frcc-blue);
+    font-family: 'Roboto Condensed', Arial, sans-serif;
+    font-size: .86rem;
+    font-weight: 900;
+    line-height: 1.05;
+}
+
+.operator-role {
+    margin-top: 3px;
+    color: #3f526f;
+    font-size: .64rem;
+    font-weight: 800;
+    line-height: 1.12;
+}
+
+.operator-meta {
+    margin-top: 7px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.operator-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--muted);
+    font-size: .57rem;
+    font-weight: 900;
+}
+
+.operator-status::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #8c96a6;
+    box-shadow: 0 0 0 2px rgba(140,150,166,.14);
+}
+
+.operator-status.status-on-duty {
+    color: var(--success);
+}
+
+.operator-status.status-on-duty::before {
+    background: #3ba55d;
+    box-shadow: 0 0 0 2px rgba(59,165,93,.14);
+}
+
+.operator-status.status-off-duty {
+    color: #778197;
+}
+
+.operator-loadout-name {
+    min-width: 0;
+    flex: 1;
+    color: #7b8494;
+    font-size: .53rem;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: right;
+}
+
+/* --------------------------------------------------------------------------
+   NATURAL-STANDING TEAM FIGURE
+   -------------------------------------------------------------------------- */
+
+#team-view .team-loadout-mannequin.operator-figure,
+#team-view .open-team-mannequin.operator-figure {
+    width: 122px;
+    height: 327px;
+    margin: 0 auto 3px;
+    position: relative;
+    z-index: 6;
+    filter: drop-shadow(0 7px 7px rgba(11,23,35,.28));
+    transform-origin: bottom center;
+}
+
+.operator-figure .figure-shadow {
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    bottom: 0;
+    height: 13px;
+    border-radius: 50%;
+    background: rgba(12,18,25,.30);
+    filter: blur(4px);
+    z-index: -1;
+}
+
+#team-view .operator-figure .head {
+    position: absolute;
+    width: 38px;
+    height: 49px;
+    top: 15px;
+    left: 42px;
+    border-radius: 45% 45% 49% 49% / 38% 38% 62% 62%;
+    background:
+        linear-gradient(105deg, rgba(255,255,255,.42), transparent 42%),
+        linear-gradient(145deg, #e6e8eb, #cdd2d8 70%);
+    border: 1px solid rgba(110,119,130,.30);
+    box-shadow: inset -4px -3px 7px rgba(88,97,109,.12);
+    z-index: 7;
+}
+
+#team-view .operator-figure .head::after {
+    content: "";
+    position: absolute;
+    left: 7px;
+    right: 7px;
+    top: 29px;
+    height: 1px;
+    border-radius: 50%;
+    background: rgba(89,99,111,.16);
+}
+
+#team-view .operator-figure .neck {
+    position: absolute;
+    width: 19px;
+    height: 18px;
+    top: 57px;
+    left: 51px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #cbd0d6, #e1e4e8 45%, #c4cad1);
+    z-index: 3;
+}
+
+#team-view .team-loadout-mannequin .head::before {
+    left: -3px;
+    right: -3px;
+}
+
+#team-view .team-loadout-mannequin.team-has-cap .head::before {
+    top: -7px;
+    height: 13px;
+    border-radius: 11px 11px 4px 4px;
+    background: linear-gradient(180deg, #203e68, #132a4b);
+    box-shadow: 11px 8px 0 -5px #132a4b, 0 1px 0 rgba(255,255,255,.15) inset;
+}
+
+#team-view .team-loadout-mannequin.team-has-cap .head .team-cap-label,
+#team-view .team-loadout-mannequin.team-has-beanie .head .team-cap-label {
+    display: block;
+}
+
+.team-cap-label {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -5px;
+    z-index: 10;
+    text-align: center;
+    color: rgba(255,255,255,.86);
+    font-size: 4px;
+    font-weight: 900;
+    letter-spacing: -.02em;
+}
+
+#team-view .team-loadout-mannequin.team-has-beanie .head::before {
+    top: -10px;
+    height: 19px;
+    border-radius: 17px 17px 5px 5px;
+    background: linear-gradient(180deg, #243f66, #162d4d);
+    border-bottom: 3px solid #11233d;
+}
+
+#team-view .operator-figure .torso {
+    position: absolute;
+    width: 82px;
+    height: 108px;
+    top: 69px;
+    left: 20px;
+    border-radius: 18px 18px 8px 8px;
+    clip-path: none;
+    overflow: visible;
+    background:
+        linear-gradient(90deg, rgba(0,0,0,.14), transparent 13% 87%, rgba(0,0,0,.13)),
+        linear-gradient(180deg, #2c4a78 0%, #203c68 47%, #18325a 100%);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.16),
+        inset 0 -12px 18px rgba(4,18,39,.12);
+    z-index: 5;
+}
+
+#team-view .operator-figure .torso::before {
+    content: "";
+    position: absolute;
+    left: 31px;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    background: #172f55;
+    clip-path: polygon(0 0, 50% 70%, 100% 0, 82% 0, 50% 39%, 18% 0);
+}
+
+#team-view .operator-figure .torso::after {
+    content: "";
+    position: absolute;
+    left: 38px;
+    top: 13px;
+    width: 5px;
+    height: 34px;
+    border-radius: 0 0 3px 3px;
+    background: rgba(18,42,78,.82);
+    box-shadow: inset 1px 0 rgba(255,255,255,.07);
+}
+
+.team-shirt-logo {
+    position: absolute;
+    left: 10px;
+    top: 25px;
+    z-index: 5;
+    color: rgba(255,255,255,.88);
+    font-size: 4.6px;
+    line-height: .95;
+    text-align: center;
+    font-weight: 900;
+    letter-spacing: .02em;
+}
+
+#team-view .team-loadout-mannequin .team-vest {
+    left: 13px;
+    right: 13px;
+    top: 19px;
+    bottom: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(7,19,39,.30);
+    background: rgba(18,37,67,.15);
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,.035);
+}
+
+/* Upper arms use polo fabric. Forearms/hands use the neutral mannequin tone. */
+#team-view .operator-figure .arm {
+    position: absolute;
+    top: 80px;
+    width: 19px;
+    height: 87px;
+    border-radius: 10px 10px 8px 8px;
+    background: linear-gradient(180deg, #294973, #1b365f);
+    z-index: 3;
+}
+
+#team-view .operator-figure .arm.left {
+    left: 10px;
+    transform: rotate(7deg);
+    transform-origin: 50% 9px;
+}
+
+#team-view .operator-figure .arm.right {
+    right: 10px;
+    transform: rotate(-7deg);
+    transform-origin: 50% 9px;
+}
+
+#team-view .operator-figure .forearm {
+    position: absolute;
+    width: 15px;
+    height: 72px;
+    top: 143px;
+    border-radius: 8px 8px 9px 9px;
+    background:
+        linear-gradient(110deg, rgba(255,255,255,.32), transparent 38%),
+        linear-gradient(180deg, #dfe3e7, #c9ced4);
+    border: 1px solid rgba(105,115,128,.18);
+    z-index: 8;
+}
+
+#team-view .operator-figure .forearm.left {
+    left: 26px;
+    transform: rotate(-21deg);
+    transform-origin: top center;
+}
+
+#team-view .operator-figure .forearm.right {
+    right: 26px;
+    transform: rotate(21deg);
+    transform-origin: top center;
+}
+
+#team-view .operator-figure .hand {
+    position: absolute;
+    width: 17px;
+    height: 21px;
+    top: 196px;
+    border-radius: 45% 45% 52% 52%;
+    background: linear-gradient(145deg, #e2e5e8, #c6ccd2);
+    border: 1px solid rgba(101,111,123,.18);
+    z-index: 13;
+}
+
+#team-view .operator-figure .hand.left {
+    left: 47px;
+    transform: rotate(26deg);
+}
+
+#team-view .operator-figure .hand.right {
+    right: 47px;
+    transform: rotate(-26deg);
+}
+
+#team-view .operator-figure .hand.left::after,
+#team-view .operator-figure .hand.right::after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    width: 10px;
+    height: 1px;
+    background: rgba(92,103,115,.12);
+}
+
+#team-view .operator-figure .team-duty-belt {
+    left: 19px;
+    top: 171px;
+    width: 84px;
+    height: 9px;
+    border-radius: 4px;
+    background: linear-gradient(180deg, #252b33, #11161c);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 1px 2px rgba(0,0,0,.24);
+    z-index: 11;
+}
+
+#team-view .operator-figure .team-duty-belt::after {
+    content: "";
+    position: absolute;
+    width: 11px;
+    height: 9px;
+    left: 36px;
+    top: 0;
+    border-radius: 2px;
+    border: 1px solid #646d79;
+    background: #262c34;
+}
+
+#team-view .operator-figure .leg {
+    position: absolute;
+    top: 178px;
+    width: 32px;
+    height: 129px;
+    border-radius: 5px 5px 11px 11px;
+    background:
+        linear-gradient(90deg, rgba(111,86,53,.18), transparent 28% 72%, rgba(94,72,45,.12)),
+        linear-gradient(180deg, #c5ab82, #b2976f 65%, #a98e68 100%);
+    z-index: 2;
+}
+
+#team-view .operator-figure .leg.left { left: 27px; }
+#team-view .operator-figure .leg.right { right: 27px; }
+
+#team-view .operator-figure .leg::before {
+    content: "";
+    position: absolute;
+    top: 37px;
+    left: 5px;
+    right: 5px;
+    height: 29px;
+    border-radius: 4px;
+    border: 1px solid rgba(111,88,58,.26);
+    background: rgba(190,162,119,.33);
+}
+
+#team-view .operator-figure .leg.left::after {
+    content: "";
+    position: absolute;
+    top: 43px;
+    right: -1px;
+    width: 1px;
+    height: 19px;
+    background: rgba(110,86,56,.18);
+}
+
+#team-view .operator-figure .team-shoe {
+    width: 36px;
+    height: 13px;
+    top: 303px;
+    border-radius: 8px 11px 4px 4px;
+    background: linear-gradient(180deg, #252a31, #101319);
+    border-bottom: 3px solid #090b0e;
+    box-shadow: inset 0 1px rgba(255,255,255,.12);
+    z-index: 9;
+}
+
+#team-view .operator-figure .team-shoe.left { left: 23px; }
+#team-view .operator-figure .team-shoe.right { right: 23px; }
+
+#team-view .operator-figure.team-has-boots .team-shoe {
+    height: 22px;
+    top: 294px;
+    border-radius: 7px 8px 4px 4px;
+}
+
+/* Reposition existing loadout details for the new human-like proportions. */
+#team-view .team-loadout-mannequin .team-patch {
+    width: 10px;
+    height: 13px;
+    right: -4px;
+    top: 20px;
+    border-radius: 4px 4px 6px 6px;
+}
+
+#team-view .team-loadout-mannequin .team-mic {
+    width: 8px;
+    height: 13px;
+    left: 18px;
+    top: 16px;
+    border-radius: 3px;
+    background: #101720;
+    box-shadow: 0 1px 2px rgba(0,0,0,.35);
+}
+
+#team-view .team-loadout-mannequin .team-badge {
+    width: 15px;
+    height: 6px;
+    right: 16px;
+    top: 21px;
+    background: linear-gradient(180deg, #eef2f7, #c9d0d8);
+}
+
+#team-view .team-loadout-mannequin .team-sleeve-tools {
+    right: -1px;
+    top: 16px;
+    height: 21px;
+}
+
+/* Belt locations are compressed around the waist of the operator figure. */
+#team-view .team-belt-gear { z-index: 15; }
+#team-view .team-belt-pos-12 { left: 56px; top: 166px; }
+#team-view .team-belt-pos-1  { left: 68px; top: 167px; }
+#team-view .team-belt-pos-2  { left: 79px; top: 170px; }
+#team-view .team-belt-pos-3  { left: 88px; top: 174px; }
+#team-view .team-belt-pos-4  { left: 91px; top: 180px; }
+#team-view .team-belt-pos-5  { left: 82px; top: 183px; }
+#team-view .team-belt-pos-6  { left: 56px; top: 185px; }
+#team-view .team-belt-pos-7  { left: 29px; top: 183px; }
+#team-view .team-belt-pos-8  { left: 20px; top: 180px; }
+#team-view .team-belt-pos-9  { left: 18px; top: 174px; }
+#team-view .team-belt-pos-10 { left: 28px; top: 170px; }
+#team-view .team-belt-pos-11 { left: 40px; top: 167px; }
+
+/* --------------------------------------------------------------------------
+   VACANT POSITION CARD
+   -------------------------------------------------------------------------- */
+
+#team-view .team-member.operator-card.open-position {
+    opacity: 1;
+    filter: none;
+    border-style: dashed;
+    border-color: rgba(13,45,108,.28);
+    box-shadow: 0 9px 22px rgba(13,45,108,.06);
+}
+
+#team-view .open-position .operator-card-visual {
+    background:
+        radial-gradient(circle at 50% 30%, rgba(255,255,255,.75), transparent 26%),
+        repeating-linear-gradient(135deg, #edf2f7 0 14px, #f8fafc 14px 28px);
+}
+
+#team-view .open-position .operator-card-visual::before {
+    opacity: .22;
+    filter: grayscale(1) blur(5px);
+}
+
+#team-view .open-team-mannequin.operator-figure {
+    opacity: .52;
+    filter: grayscale(1) drop-shadow(0 5px 6px rgba(30,43,56,.11));
+}
+
+#team-view .open-team-mannequin.operator-figure .head,
+#team-view .open-team-mannequin.operator-figure .neck,
+#team-view .open-team-mannequin.operator-figure .forearm,
+#team-view .open-team-mannequin.operator-figure .hand {
+    background: rgba(224,230,236,.82);
+    border: 1px dashed rgba(86,103,123,.42);
+    box-shadow: none;
+}
+
+#team-view .open-team-mannequin.operator-figure .torso,
+#team-view .open-team-mannequin.operator-figure .arm,
+#team-view .open-team-mannequin.operator-figure .leg {
+    background: rgba(222,229,237,.70);
+    border: 1px dashed rgba(73,96,122,.44);
+    box-shadow: none;
+}
+
+#team-view .open-team-mannequin.operator-figure .team-shoe,
+#team-view .open-team-mannequin.operator-figure .team-duty-belt {
+    background: rgba(119,135,152,.48);
+    border: 1px dashed rgba(68,84,103,.35);
+    box-shadow: none;
+}
+
+#team-view .open-team-mannequin.operator-figure .torso::before,
+#team-view .open-team-mannequin.operator-figure .torso::after,
+#team-view .open-team-mannequin.operator-figure .leg::before {
+    opacity: .35;
+}
+
+#team-view .open-position .operator-info-plate {
+    background: #f8fafc;
+}
+
+#team-view .open-position .operator-name {
+    color: #64758a;
+}
+
+/* The primary cards now contain the useful identity/status information, so the
+   older duplicated detail-card row is intentionally hidden in this visual mode. */
+#team-view .team-cards {
+    display: none;
+}
+
+@media (max-width: 1150px) {
+    #team-view .team-member.operator-card {
+        width: 144px;
+        min-width: 144px;
+    }
+
+    .operator-card-visual {
+        height: 340px;
+    }
+
+    #team-view .team-loadout-mannequin.operator-figure,
+    #team-view .open-team-mannequin.operator-figure {
+        transform: scale(.95);
+        transform-origin: bottom center;
+    }
+}
+
+@media (max-width: 760px) {
+    #team-view .team-stage {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    #team-view .team-lineup {
+        justify-content: flex-start;
+    }
+
+    #team-view .team-member.operator-card.supervisor,
+    #team-view .team-member.operator-card.tech-iv {
+        transform: none;
+    }
+}
