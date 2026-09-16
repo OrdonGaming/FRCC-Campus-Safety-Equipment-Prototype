@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="FRCC Campus Safety Equipment Dashboard Larimer Campus proof-of-concept">
     <title>FRCC Campus Safety Equipment Dashboard</title>
-    <link rel="stylesheet" href="styles.css?v=0.9.0">
-    <link rel="stylesheet" href="interactive.css?v=0.9.0">
-    <link rel="stylesheet" href="team.css?v=0.9.0">
-    <link rel="stylesheet" href="permissions.css?v=0.9.0">
-    <link rel="stylesheet" href="export.css?v=0.9.0">
-    <link rel="stylesheet" href="polish.css?v=0.9.0">
+    <link rel="stylesheet" href="styles.css?v=0.10.0">
+    <link rel="stylesheet" href="interactive.css?v=0.10.0">
+    <link rel="stylesheet" href="team.css?v=0.10.0">
+    <link rel="stylesheet" href="permissions.css?v=0.10.0">
+    <link rel="stylesheet" href="export.css?v=0.10.0">
+    <link rel="stylesheet" href="polish.css?v=0.10.0">
 </head>
 <body class="home-active">
     <div class="app-shell">
@@ -37,7 +37,6 @@
 
             <button class="nav-button muted" id="reset-demo-button">Reset Demo Data</button>
             <div class="prototype-badge">Larimer Campus Prototype</div>
-            <div class="brand-placeholder-note">Approved FRCC logo artwork can replace the temporary FRCC text mark when the official asset file is added.</div>
         </aside>
 
         <div class="workspace">
@@ -76,7 +75,7 @@
                             <p>A videogame-inspired equipment management concept designed to make technician loadouts, team readiness, inventory status, and equipment assignments easier to understand at a glance.</p>
 
                             <div class="home-actions">
-                                <button class="button gold" id="home-start-demo">Start Demo</button>
+                                <button class="button gold" id="home-start-demo" title="Play the automatic prototype walkthrough">Start Demo</button>
                                 <button class="button primary" data-home-view="loadout-view">Open Technician Loadout</button>
                                 <button class="button secondary" data-home-view="team-view">View Larimer Team</button>
                             </div>
@@ -90,7 +89,7 @@
                                     <div class="home-status-row"><span>Demo role</span><strong id="home-role-value">Supervisor</strong></div>
                                     <div class="home-status-row"><span>Viewing</span><strong id="home-tech-value">Jordan Davis</strong></div>
                                     <div class="home-status-row"><span>Inventory</span><strong id="home-inventory-value">—</strong></div>
-                                    <div class="home-status-row"><span>Build</span><strong id="home-build-value">0.9.0</strong></div>
+                                    <div class="home-status-row"><span>Build</span><strong id="home-build-value">0.10.0</strong></div>
                                 </div>
                             </div>
                             <div class="home-prototype-note">This demonstration uses fictional or sanitized data and local browser storage only. It is not connected to live FRCC personnel, access-control, or inventory systems.</div>
@@ -145,15 +144,15 @@
 
                     <section class="home-section demo-walkthrough">
                         <div class="demo-walkthrough-copy">
-                            <p class="eyebrow">Suggested presentation flow</p>
-                            <h3>A quick FireFly demonstration</h3>
-                            <p>This sequence highlights the core proof-of-concept without requiring someone to understand the prototype before they begin.</p>
+                            <p class="eyebrow">Automatic presentation flow</p>
+                            <h3>Press Start Demo and watch the workflow</h3>
+                            <p>The automatic demo plays through the major prototype features like a short guided movie. It uses one temporary example loadout, replaces any previous automated example before starting, and returns here when it is finished.</p>
                         </div>
                         <div class="demo-steps">
-                            <div class="demo-step"><div class="demo-step-number">1</div><div><strong>Start in Supervisor mode.</strong><span>Show how a supervisor can view and edit the entire Larimer team while other demo roles have narrower permissions.</span></div></div>
-                            <div class="demo-step"><div class="demo-step-number">2</div><div><strong>Open a technician loadout.</strong><span>Swap a hat or equipment item, move belt gear to another clock position, and show that nothing changes in inventory until Save Loadout is used.</span></div></div>
-                            <div class="demo-step"><div class="demo-step-number">3</div><div><strong>Switch to Team View.</strong><span>Show the Supervisor centered, Technician IV to the Supervisor's right, Technician IIIs balanced around them, and open positions at the end.</span></div></div>
-                            <div class="demo-step"><div class="demo-step-number">4</div><div><strong>Export a report.</strong><span>Generate the Full Prototype Workbook to demonstrate how the visual interface can still produce traditional equipment records.</span></div></div>
+                            <div class="demo-step"><div class="demo-step-number">1</div><div><strong>Supervisor access.</strong><span>The demo switches to Supervisor permissions and opens a Technician III loadout.</span></div></div>
+                            <div class="demo-step"><div class="demo-step-number">2</div><div><strong>Modify a loadout.</strong><span>It creates a temporary planning loadout, changes headwear and footwear, and moves duty-belt equipment to new clock positions.</span></div></div>
+                            <div class="demo-step"><div class="demo-step-number">3</div><div><strong>Save and verify in Team View.</strong><span>The saved configuration is shown on the technician’s mannequin in the Larimer team lineup.</span></div></div>
+                            <div class="demo-step"><div class="demo-step-number">4</div><div><strong>Simulate Excel export.</strong><span>The demo opens reporting and shows the technician-loadout export workflow without forcing a file download on the viewer.</span></div></div>
                         </div>
                     </section>
                 </section>
@@ -347,19 +346,19 @@
 
             <footer class="footer">
                 <span>FRCC Campus Safety Equipment Dashboard</span>
-                <span>Proof of Concept · Local demo data only · Build 0.9.0</span>
+                <span>Proof of Concept · Local demo data only · Build 0.10.0</span>
             </footer>
         </div>
     </div>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-    <script src="data.js?v=0.9.0"></script>
-    <script src="app.js?v=0.9.0"></script>
-    <script src="team.js?v=0.9.0"></script>
-    <script src="permissions.js?v=0.9.0"></script>
+    <script src="data.js?v=0.10.0"></script>
+    <script src="app.js?v=0.10.0"></script>
+    <script src="team.js?v=0.10.0"></script>
+    <script src="permissions.js?v=0.10.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-    <script src="export.js?v=0.9.0"></script>
-    <script src="home.js?v=0.9.0"></script>
+    <script src="export.js?v=0.10.0"></script>
+    <script src="home.js?v=0.10.0"></script>
 </body>
 </html>
