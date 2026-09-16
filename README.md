@@ -15,7 +15,7 @@ A zero-cost proof-of-concept for a videogame-inspired Campus Safety equipment da
 - Open positions grouped at the far right of the team lineup
 - Demo user roles and permissions
 - Local browser storage only
-- Excel export later in development
+- Client-side Excel export
 
 ## Prototype constraints
 
@@ -40,7 +40,7 @@ Official FRCC logo artwork should be added from approved source files and should
 
 ## Current interactive build
 
-Build 0.7.0 includes the Technician Loadout workflow, enhanced Larimer Team View, and a functional demo role/permission system.
+Build 0.8.0 includes the Technician Loadout workflow, enhanced Larimer Team View, functional demo role/permission system, and client-side Excel reporting.
 
 ### Technician Loadout
 
@@ -81,7 +81,7 @@ Build 0.7.0 includes the Technician Loadout workflow, enhanced Larimer Team View
 
 ### Demo Roles & Permissions
 
-The top-bar Demo Role selector now changes actual prototype permissions rather than only changing a label.
+The top-bar Demo Role selector changes actual prototype permissions rather than only changing a label.
 
 - **Technician III** acts as Taylor Reed. Can create and edit personal hypothetical loadouts, but the personal issued loadout is read only and other technicians are read only.
 - **Technician IV** acts as Alex Morgan. Can edit personal hypothetical and issued loadouts, while other technicians remain read only.
@@ -90,10 +90,21 @@ The top-bar Demo Role selector now changes actual prototype permissions rather t
 - A visible permission banner shows who the role is acting as, who is currently being viewed, whether the current loadout is editable, and the role's major capabilities.
 - Switching demo roles automatically opens that role's demo user where applicable.
 - Read-only states block inventory swaps, drag-and-drop, belt-position changes, Save, Save As, and New Loadout actions as appropriate.
-- Team View and Inventory remain viewable to all four demo roles.
+- Team View, Inventory, and prototype report export remain viewable to all four demo roles.
 
 These permission defaults are for demonstration only. A production version would use configurable user-group permissions backed by real authentication.
 
+### Excel Export
+
+Build 0.8.0 adds an Excel Export view. Reports are generated in the user's browser and downloaded as `.xlsx` files.
+
+- **Full Prototype Workbook** includes overview, inventory, available inventory, technician roster, team positions, team equipment, and every saved/issued loadout.
+- **Inventory Report** includes all prototype inventory and a separate available-inventory sheet.
+- **Current Technician Loadout** exports the loadout currently being viewed, including item details and duty-belt clock positions. If the user has unsaved staged changes, the export identifies the report as a current unsaved draft.
+- **Team Loadout Report** exports lineup order, open positions, role/status information, and detailed equipment for each filled team position.
+- Export files are generated locally in the browser. Prototype data is not uploaded to a reporting server during the export process.
+- The prototype uses the free SheetJS Community Edition browser library to generate `.xlsx` workbooks.
+
 ## Status
 
-Interactive Larimer Campus proof-of-concept in active development. Excel export and presentation/demo polish remain planned prototype stages.
+Interactive Larimer Campus proof-of-concept in active development. Presentation polish, approved logo integration, and final demonstration cleanup remain planned prototype stages.
