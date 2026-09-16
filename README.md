@@ -38,6 +38,25 @@ This prototype uses approved Front Range Community College branding.
 
 Official FRCC logo artwork should be added from approved source files and should not be recreated, distorted, recolored, or modified.
 
+## Current interactive build
+
+The Technician Loadout screen now supports:
+
+- Clickable equipment slots
+- Inventory filtering by selected slot
+- Click-to-equip equipment swapping
+- Basic drag-and-drop from inventory to compatible equipment slots
+- Immediate mannequin feedback for selected gear
+- Duty-belt clock chips that select their linked equipment slot
+- Unsaved-change highlighting
+- Required-slot validation
+- Assigned/available/maintenance inventory validation
+- Functional Discard, Save As, New Loadout, and Save Loadout controls
+- Issued loadouts that update prototype inventory only when saved
+- Hypothetical loadouts that save without reserving or changing inventory
+- Browser `localStorage` persistence
+- Reset Demo Data
+
 ## Status
 
-Initial prototype development.
+Interactive loadout prototype in active development.
