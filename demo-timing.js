@@ -1,13 +1,40 @@
-const AUTO_DEMO_TIMING_SCALE = 2;
-const AUTO_DEMO_PATCH_BUILD = '0.10.1';
+const AUTO_DEMO_TIMING_SCALE = 1;
+const AUTO_DEMO_PATCH_BUILD = '0.10.3';
 
-// The original automatic walkthrough was intentionally brisk. This patch
-// doubles every scripted pause so the same sequence plays at a presentation-
-// friendly pace of roughly one minute without changing the demonstrated steps.
-if (typeof waitForDemo === 'function') {
+// Build 0.10.2 moved the approximately one-minute pacing into home.js.
+// Keep this compatibility layer at 1x so timing is not doubled a second time.
+if (typeof waitForDemo === 'function' && AUTO_DEMO_TIMING_SCALE !== 1) {
     const baseWaitForDemoForTiming = waitForDemo;
     waitForDemo = function waitForDemoAtPresentationPace(milliseconds) {
         return baseWaitForDemoForTiming(Math.round(milliseconds * AUTO_DEMO_TIMING_SCALE));
+    };
+}
+
+// Replace the second belt demonstration with the campus key ring. This avoids
+// moving the flashlight and also uses the 8:00 position that becomes available
+// after the radio moves from 8:00 to 9:00 in the previous step.
+if (typeof demoStep === 'function') {
+    const baseDemoStepForBeltExample = demoStep;
+    demoStep = async function demoStepWithKeyRingExample(stepNumber, totalSteps, label, status, target, action, hold = 900) {
+        if (stepNumber === 9) {
+            return baseDemoStepForBeltExample(
+                stepNumber,
+                totalSteps,
+                'Move Key Ring',
+                'Moving the campus key ring from 10:00 to the newly open 8:00 belt position to demonstrate a second belt-layout change.',
+                () => document.querySelector('[data-slot-id="keys"]'),
+                async () => {
+                    selectSlot('keys');
+                    await waitForDemo(450);
+                    await focusDemoTarget(() => document.querySelector('[data-position="8:00"]'));
+                    await waitForDemo(350);
+                    moveSelectedBeltItem('8:00');
+                },
+                hold
+            );
+        }
+
+        return baseDemoStepForBeltExample(stepNumber, totalSteps, label, status, target, action, hold);
     };
 }
 
