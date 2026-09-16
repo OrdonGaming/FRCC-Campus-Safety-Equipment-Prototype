@@ -1,5 +1,5 @@
 const AUTO_DEMO_TIMING_SCALE = 1;
-const AUTO_DEMO_PATCH_BUILD = '0.11.0';
+const AUTO_DEMO_PATCH_BUILD = '0.11.1';
 
 // Build 0.10.2 moved the approximately one-minute pacing into home.js.
 // Keep this compatibility layer at 1x so timing is not doubled a second time.
@@ -37,15 +37,30 @@ if (typeof demoStep === 'function') {
     };
 }
 
-function loadMannequinRedesignStyles() {
-    const existing = document.querySelector('link[data-mannequin-redesign]');
-    if (existing) return;
-
+function appendPrototypeStylesheet(href, dataAttribute) {
+    if (document.querySelector(`link[${dataAttribute}]`)) return;
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = `mannequin-v2.css?v=${AUTO_DEMO_PATCH_BUILD}`;
-    link.dataset.mannequinRedesign = 'true';
+    link.href = href;
+    link.setAttribute(dataAttribute, 'true');
     document.head.appendChild(link);
+}
+
+function loadMannequinRedesignStyles() {
+    appendPrototypeStylesheet(`mannequin-v2.css?v=${AUTO_DEMO_PATCH_BUILD}`, 'data-mannequin-redesign');
+    appendPrototypeStylesheet(`team-card-v2.css?v=${AUTO_DEMO_PATCH_BUILD}`, 'data-team-card-redesign');
+}
+
+function loadTeamCardRenderer() {
+    if (document.querySelector('script[data-team-card-renderer]') || window.__operatorCardTeamViewInstalled) return;
+
+    const script = document.createElement('script');
+    script.src = `team-card-v2.js?v=${AUTO_DEMO_PATCH_BUILD}`;
+    script.dataset.teamCardRenderer = 'true';
+    script.onload = () => {
+        if (typeof renderTeam === 'function') renderTeam();
+    };
+    document.body.appendChild(script);
 }
 
 function applyAutoDemoPatchBuildLabel() {
@@ -78,4 +93,5 @@ if (typeof overviewRows === 'function') {
 }
 
 loadMannequinRedesignStyles();
+loadTeamCardRenderer();
 applyAutoDemoPatchBuildLabel();
