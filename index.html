@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="FRCC Campus Safety Equipment Dashboard Larimer Campus proof-of-concept">
     <title>FRCC Campus Safety Equipment Dashboard</title>
-    <link rel="stylesheet" href="styles.css?v=0.5.0">
-    <link rel="stylesheet" href="interactive.css?v=0.5.0">
+    <link rel="stylesheet" href="styles.css?v=0.6.0">
+    <link rel="stylesheet" href="interactive.css?v=0.6.0">
+    <link rel="stylesheet" href="team.css?v=0.6.0">
 </head>
 <body>
     <div class="app-shell">
@@ -148,9 +149,11 @@
                         <div>
                             <p class="eyebrow">Larimer Campus</p>
                             <h2 id="team-title">Team View</h2>
-                            <p class="section-description">The lineup automatically centers the active team. Vacant positions remain at the far right.</p>
+                            <p class="section-description">The lineup automatically centers the active team. Each mannequin reflects that technician's saved loadout. Vacant positions remain at the far right.</p>
                         </div>
                     </div>
+
+                    <div id="team-summary" class="team-summary" aria-label="Team staffing summary"></div>
 
                     <section class="team-stage panel">
                         <div class="team-lineup" id="team-lineup"></div>
@@ -175,14 +178,15 @@
 
             <footer class="footer">
                 <span>FRCC Campus Safety Equipment Dashboard</span>
-                <span>Proof of Concept · Local demo data only · Build 0.5.0</span>
+                <span>Proof of Concept · Local demo data only · Build 0.6.0</span>
             </footer>
         </div>
     </div>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-    <script src="data.js?v=0.5.0"></script>
-    <script src="app.js?v=0.5.0"></script>
+    <script src="data.js?v=0.6.0"></script>
+    <script src="app.js?v=0.6.0"></script>
+    <script src="team.js?v=0.6.0"></script>
 </body>
 </html>
