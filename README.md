@@ -40,16 +40,21 @@ Official FRCC logo artwork should be added from approved source files and should
 
 ## Current interactive build
 
-The Technician Loadout screen now supports:
+Build 0.5.0 of the Technician Loadout screen supports:
 
 - Clickable equipment slots
 - Inventory filtering by selected slot
 - Click-to-equip equipment swapping
 - Basic drag-and-drop from inventory to compatible equipment slots
 - Immediate mannequin feedback for selected gear
-- Duty-belt clock chips that select their linked equipment slot
-- Unsaved-change highlighting
-- Required-slot validation
+- More recognizable visual representations for radio, mic, name badge, sleeve tools, patch, keys, access card, flashlight, pouches, handcuffs, tourniquet, CPR kit, and baton
+- Hat and footwear visual changes, including billed cap, beanie, shoes, and boots
+- Visible uniform state for shirt, under-shirt protective vest, pants, and footwear
+- Editable duty-belt clock positions from 1:00 through 12:00
+- Automatic swapping when equipment is moved onto an occupied clock position
+- Belt positions saved independently for each loadout
+- Unsaved-change highlighting for both equipment and belt placement
+- Required-slot and belt-position validation
 - Assigned/available/maintenance inventory validation
 - Functional Discard, Save As, New Loadout, and Save Loadout controls
 - Issued loadouts that update prototype inventory only when saved
@@ -59,4 +64,4 @@ The Technician Loadout screen now supports:
 
 ## Status
 
-Interactive loadout prototype in active development.
+Interactive Larimer technician loadout prototype in active development. Team-view loadout visualization is the next planned development stage.
