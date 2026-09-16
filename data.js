@@ -1,78 +1,136 @@
+const demoTechnicians = [
+    { id: 'tech-001', name: 'Jordan Davis', role: 'Supervisor', loadout: 'Issued Loadout', status: 'On Duty' },
+    { id: 'tech-002', name: 'Alex Morgan', role: 'Technician IV', loadout: 'Issued Loadout', status: 'On Duty' },
+    { id: 'tech-003', name: 'Taylor Reed', role: 'Technician III', loadout: 'Closing', status: 'On Duty' },
+    { id: 'tech-004', name: 'Casey Brooks', role: 'Technician III', loadout: 'Issued Loadout', status: 'On Duty' },
+    { id: 'tech-005', name: 'Riley Chen', role: 'Technician III', loadout: 'Event', status: 'Off Duty' },
+    { id: 'tech-006', name: 'Morgan Lee', role: 'Technician III', loadout: 'Issued Loadout', status: 'On Duty' }
+];
+
+const demoEquipmentSlots = [
+    { id: 'hat', label: 'Hat', defaultItem: 'Billed Campus Safety Cap', category: 'Uniform', assetPrefix: 'CAP', required: true },
+    { id: 'shirt', label: 'Uniform Shirt', defaultItem: 'Campus Safety Polo', category: 'Uniform', assetPrefix: 'SH', required: true },
+    { id: 'vest', label: 'Under Shirt', defaultItem: 'Protective Vest', category: 'Protective Equipment', assetPrefix: 'VST', required: true },
+    { id: 'mic', label: 'Radio Mic', defaultItem: 'Wireless Radio Mic', category: 'Radio', assetPrefix: 'MIC', required: true },
+    { id: 'name-badge', label: 'Name Badge', defaultItem: 'Campus Safety Name Badge', category: 'Identification', assetPrefix: 'NB', required: true },
+    { id: 'left-sleeve', label: 'Left Sleeve', defaultItem: 'Pen / Sharpie / Handcuff Key Set', category: 'Duty Gear', assetPrefix: 'SL', required: true },
+    { id: 'patch', label: 'Right Shoulder', defaultItem: 'Campus Safety Patch', category: 'Uniform', assetPrefix: 'PCH', required: true },
+    { id: 'radio', label: 'Belt Radio', defaultItem: 'Motorola Radio', category: 'Radio', assetPrefix: 'R', required: true },
+    { id: 'keys', label: 'Keys', defaultItem: 'Campus Key Ring', category: 'Access', assetPrefix: 'K', required: true },
+    { id: 'access-card', label: 'Access Card', defaultItem: 'Campus Access Card', category: 'Access', assetPrefix: 'AC', required: true },
+    { id: 'flashlight', label: 'Flashlight', defaultItem: 'Duty Flashlight', category: 'Duty Gear', assetPrefix: 'F', required: true },
+    { id: 'gloves', label: 'Gloves Pouch', defaultItem: 'Gloves Pouch', category: 'Medical', assetPrefix: 'G', required: true },
+    { id: 'handcuffs', label: 'Handcuffs', defaultItem: 'Handcuffs', category: 'Duty Gear', assetPrefix: 'H', required: true },
+    { id: 'tourniquet', label: 'Tourniquet', defaultItem: 'Tourniquet Kit', category: 'Medical', assetPrefix: 'TQ', required: true },
+    { id: 'cpr', label: 'CPR Kit', defaultItem: 'CPR Barrier Kit', category: 'Medical', assetPrefix: 'CPR', required: true },
+    { id: 'baton', label: 'Baton', defaultItem: 'Duty Baton', category: 'Duty Gear', assetPrefix: 'B', required: true },
+    { id: 'pants', label: 'Uniform Pants', defaultItem: 'Khaki 5.11 Cargo Pants', category: 'Uniform', assetPrefix: 'P', required: true },
+    { id: 'footwear', label: 'Footwear', defaultItem: 'Black Laced Shoes', category: 'Uniform', assetPrefix: 'S', required: true }
+];
+
+const demoTeamPositions = [
+    { technicianId: 'tech-003', type: 'filled' },
+    { technicianId: 'tech-004', type: 'filled' },
+    { technicianId: 'tech-001', type: 'filled' },
+    { technicianId: 'tech-002', type: 'filled' },
+    { technicianId: 'tech-005', type: 'filled' },
+    { technicianId: 'tech-006', type: 'filled' },
+    { technicianId: null, type: 'open', role: 'Technician III', label: 'Open Position' }
+];
+
+const demoBeltPositions = [
+    { position: '1:00', slotId: 'tourniquet' },
+    { position: '2:00', slotId: 'flashlight' },
+    { position: '3:00', slotId: 'baton' },
+    { position: '4:00', slotId: 'gloves' },
+    { position: '5:00', slotId: 'handcuffs' },
+    { position: '6:00', slotId: null },
+    { position: '7:00', slotId: 'cpr' },
+    { position: '8:00', slotId: 'radio' },
+    { position: '9:00', slotId: null },
+    { position: '10:00', slotId: 'keys' },
+    { position: '11:00', slotId: 'access-card' },
+    { position: '12:00', slotId: null }
+];
+
+const demoInventory = [];
+const issuedAssignments = {};
+
+function makeAssetId(slot, technicianNumber) {
+    return `LC-${slot.assetPrefix}-${String(technicianNumber).padStart(3, '0')}`;
+}
+
+demoTechnicians.forEach((technician, technicianIndex) => {
+    const technicianNumber = technicianIndex + 1;
+    issuedAssignments[technician.id] = {};
+
+    demoEquipmentSlots.forEach(slot => {
+        const id = makeAssetId(slot, technicianNumber);
+        issuedAssignments[technician.id][slot.id] = id;
+        demoInventory.push({
+            id,
+            name: slot.defaultItem,
+            category: slot.category,
+            slotId: slot.id,
+            status: 'Assigned',
+            condition: technicianNumber % 3 === 0 ? 'Fair' : 'Good',
+            assignedTo: technician.name
+        });
+    });
+});
+
+demoEquipmentSlots.forEach((slot, slotIndex) => {
+    demoInventory.push({
+        id: `LC-${slot.assetPrefix}-SP01`,
+        name: slot.defaultItem,
+        category: slot.category,
+        slotId: slot.id,
+        status: 'Available',
+        condition: slotIndex % 4 === 0 ? 'Excellent' : 'Good',
+        assignedTo: ''
+    });
+});
+
+demoInventory.push(
+    { id: 'LC-CAP-SP02', name: 'Campus Safety Beanie', category: 'Uniform', slotId: 'hat', status: 'Available', condition: 'Excellent', assignedTo: '' },
+    { id: 'LC-S-SP02', name: 'Black Laced Boots', category: 'Uniform', slotId: 'footwear', status: 'Available', condition: 'Excellent', assignedTo: '' },
+    { id: 'LC-B-SP02', name: 'Duty Baton', category: 'Duty Gear', slotId: 'baton', status: 'Maintenance', condition: 'Needs Inspection', assignedTo: '' },
+    { id: 'LC-R-SP02', name: 'Motorola Radio', category: 'Radio', slotId: 'radio', status: 'Available', condition: 'Excellent', assignedTo: '' },
+    { id: 'LC-F-SP02', name: 'Duty Flashlight', category: 'Duty Gear', slotId: 'flashlight', status: 'Available', condition: 'New', assignedTo: '' }
+);
+
+function cloneAssignments(assignments) {
+    return JSON.parse(JSON.stringify(assignments));
+}
+
+const demoLoadouts = {};
+
+demoTechnicians.forEach(technician => {
+    const issued = cloneAssignments(issuedAssignments[technician.id]);
+    const closing = cloneAssignments(issued);
+    const event = cloneAssignments(issued);
+    const winter = cloneAssignments(issued);
+    const testSetup = cloneAssignments(issued);
+
+    winter.hat = 'LC-CAP-SP02';
+    event.footwear = 'LC-S-SP02';
+
+    demoLoadouts[technician.id] = {
+        'Issued Loadout': { type: 'issued', assignments: issued },
+        'Closing': { type: 'hypothetical', assignments: closing },
+        'Event': { type: 'hypothetical', assignments: event },
+        'Winter': { type: 'hypothetical', assignments: winter },
+        'Test Setup': { type: 'hypothetical', assignments: testSetup }
+    };
+});
+
 const demoData = {
-    technicians: [
-        { id: 'tech-001', name: 'Jordan Davis', role: 'Supervisor', loadout: 'Issued Loadout', status: 'On Duty' },
-        { id: 'tech-002', name: 'Alex Morgan', role: 'Technician IV', loadout: 'Issued Loadout', status: 'On Duty' },
-        { id: 'tech-003', name: 'Taylor Reed', role: 'Technician III', loadout: 'Closing', status: 'On Duty' },
-        { id: 'tech-004', name: 'Casey Brooks', role: 'Technician III', loadout: 'Issued Loadout', status: 'On Duty' },
-        { id: 'tech-005', name: 'Riley Chen', role: 'Technician III', loadout: 'Event', status: 'Off Duty' },
-        { id: 'tech-006', name: 'Morgan Lee', role: 'Technician III', loadout: 'Issued Loadout', status: 'On Duty' }
-    ],
-
-    teamPositions: [
-        { technicianId: 'tech-003', type: 'filled' },
-        { technicianId: 'tech-004', type: 'filled' },
-        { technicianId: 'tech-001', type: 'filled' },
-        { technicianId: 'tech-002', type: 'filled' },
-        { technicianId: 'tech-005', type: 'filled' },
-        { technicianId: 'tech-006', type: 'filled' },
-        { technicianId: null, type: 'open', role: 'Technician III', label: 'Open Position' }
-    ],
-
-    equipmentSlots: [
-        { id: 'hat', label: 'Hat', equipped: 'Billed Cap' },
-        { id: 'shirt', label: 'Uniform Shirt', equipped: 'Campus Safety Polo' },
-        { id: 'vest', label: 'Under Shirt', equipped: 'Protective Vest' },
-        { id: 'mic', label: 'Radio Mic', equipped: 'Wireless Mic' },
-        { id: 'name-badge', label: 'Name Badge', equipped: 'Name Badge' },
-        { id: 'left-sleeve', label: 'Left Sleeve', equipped: 'Pen / Sharpie / Handcuff Key' },
-        { id: 'patch', label: 'Right Shoulder', equipped: 'Campus Safety Patch' },
-        { id: 'radio', label: 'Belt Radio', equipped: 'Radio LC-R014' },
-        { id: 'keys', label: 'Keys', equipped: 'Key Ring LC-K008' },
-        { id: 'access-card', label: 'Access Card', equipped: 'Access Card Demo' },
-        { id: 'flashlight', label: 'Flashlight', equipped: 'Flashlight LC-F021' },
-        { id: 'gloves', label: 'Gloves Pouch', equipped: 'Gloves Pouch' },
-        { id: 'handcuffs', label: 'Handcuffs', equipped: 'Handcuffs LC-H011' },
-        { id: 'tourniquet', label: 'Tourniquet', equipped: 'Tourniquet Kit' },
-        { id: 'cpr', label: 'CPR Kit', equipped: 'CPR Barrier Kit' },
-        { id: 'baton', label: 'Baton', equipped: 'Baton LC-B007' },
-        { id: 'pants', label: 'Uniform Pants', equipped: 'Khaki 5.11 Cargo Pants' },
-        { id: 'footwear', label: 'Footwear', equipped: 'Black Laced Shoes' }
-    ],
-
-    beltPositions: [
-        { position: '1:00', item: 'Tourniquet' },
-        { position: '2:00', item: 'Flashlight' },
-        { position: '3:00', item: 'Baton' },
-        { position: '4:00', item: 'Gloves' },
-        { position: '5:00', item: 'Handcuffs' },
-        { position: '6:00', item: 'Open' },
-        { position: '7:00', item: 'CPR Kit' },
-        { position: '8:00', item: 'Radio' },
-        { position: '9:00', item: 'Open' },
-        { position: '10:00', item: 'Keys' },
-        { position: '11:00', item: 'Access Card' },
-        { position: '12:00', item: 'Open' }
-    ],
-
-    inventory: [
-        { id: 'LC-R014', name: 'Motorola Radio', category: 'Radio', status: 'Assigned', condition: 'Good', assignedTo: 'Jordan Davis' },
-        { id: 'LC-R021', name: 'Motorola Radio', category: 'Radio', status: 'Available', condition: 'Excellent', assignedTo: '' },
-        { id: 'LC-F021', name: 'Duty Flashlight', category: 'Flashlight', status: 'Assigned', condition: 'Good', assignedTo: 'Jordan Davis' },
-        { id: 'LC-F044', name: 'Duty Flashlight', category: 'Flashlight', status: 'Available', condition: 'Good', assignedTo: '' },
-        { id: 'LC-H011', name: 'Handcuffs', category: 'Duty Gear', status: 'Assigned', condition: 'Good', assignedTo: 'Jordan Davis' },
-        { id: 'LC-H018', name: 'Handcuffs', category: 'Duty Gear', status: 'Available', condition: 'Good', assignedTo: '' },
-        { id: 'LC-B007', name: 'Baton', category: 'Duty Gear', status: 'Assigned', condition: 'Good', assignedTo: 'Jordan Davis' },
-        { id: 'LC-B012', name: 'Baton', category: 'Duty Gear', status: 'Maintenance', condition: 'Needs Inspection', assignedTo: '' },
-        { id: 'LC-K008', name: 'Key Ring', category: 'Access', status: 'Assigned', condition: 'Good', assignedTo: 'Jordan Davis' },
-        { id: 'LC-T003', name: 'Tourniquet Kit', category: 'Medical', status: 'Available', condition: 'New', assignedTo: '' },
-        { id: 'LC-C006', name: 'CPR Barrier Kit', category: 'Medical', status: 'Available', condition: 'New', assignedTo: '' },
-        { id: 'LC-G004', name: 'Gloves Pouch', category: 'Medical', status: 'Available', condition: 'Good', assignedTo: '' },
-        { id: 'LC-U101', name: 'Campus Safety Polo', category: 'Uniform', status: 'Available', condition: 'New', assignedTo: '' },
-        { id: 'LC-U202', name: 'Khaki 5.11 Cargo Pants', category: 'Uniform', status: 'Available', condition: 'New', assignedTo: '' },
-        { id: 'LC-U305', name: 'Black Laced Shoes', category: 'Uniform', status: 'Available', condition: 'New', assignedTo: '' },
-        { id: 'LC-CAP09', name: 'Billed Campus Safety Cap', category: 'Uniform', status: 'Available', condition: 'Good', assignedTo: '' },
-        { id: 'LC-BEAN04', name: 'Campus Safety Beanie', category: 'Uniform', status: 'Available', condition: 'Good', assignedTo: '' }
-    ]
+    technicians: demoTechnicians,
+    teamPositions: demoTeamPositions,
+    equipmentSlots: demoEquipmentSlots,
+    beltPositions: demoBeltPositions,
+    inventory: demoInventory,
+    loadouts: demoLoadouts
 };
 
 const defaultDemoState = JSON.parse(JSON.stringify(demoData));
