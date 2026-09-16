@@ -39,7 +39,25 @@ This prototype uses the approved Front Range Community College color and typogra
 
 ## Current interactive build
 
-Build 0.10.0 includes the Technician Loadout workflow, enhanced Larimer Team View, functional demo role/permission system, client-side Excel reporting, a presentation-ready Home screen, and an automatic guided demo.
+Build 0.11.0 includes the Technician Loadout workflow, enhanced Larimer Team View, functional demo role/permission system, client-side Excel reporting, a presentation-ready Home screen, an automatic guided demo, and a stronger concept-art-inspired mannequin visual redesign.
+
+### Mannequin Visual Redesign
+
+Build 0.11.0 substantially reworks the mannequin presentation while keeping the underlying prototype behavior unchanged.
+
+- Taller, cleaner technician silhouette with less blocky proportions
+- More dimensional neutral head and body treatment while remaining a non-realistic display mannequin
+- Refined LAPD-blue polo with collar, seam, shading, and subtle protective-vest layering
+- Improved khaki cargo pants with visible cargo-pocket treatment and leg shaping
+- Cleaner black shoes and boot variants
+- More polished duty belt with buckle and keeper details
+- Refined hats, beanies, badge, mic, patch, and duty-gear presentation
+- Improved mannequin stage with a presentation-style floor/platform treatment
+- Team mannequins use the same visual language as the individual loadout mannequin
+- Open positions now use a deliberate outlined/ghosted mannequin instead of simply dimming a normal team member
+- Supervisor hierarchy is visually emphasized without changing body shape or implying a different type of person
+
+The redesign is implemented as a presentation layer only. Loadouts, inventory behavior, permissions, Excel exports, local storage, and the automatic demo continue to use the same data and logic.
 
 ### Technician Loadout
 
@@ -106,7 +124,7 @@ The Excel Export view generates `.xlsx` reports in the user's browser.
 
 ### Automated Demo
 
-The Home screen's **Start Demo** button now plays the major prototype workflow automatically like a short guided movie.
+The Home screen's **Start Demo** button plays the major prototype workflow automatically like a short guided movie.
 
 The sequence:
 
@@ -116,7 +134,7 @@ The sequence:
 4. Creates one temporary `Automated Demo Loadout` cloned from the issued configuration.
 5. Changes the billed cap to the available Campus Safety beanie.
 6. Changes footwear to the available black laced boots.
-7. Moves the belt radio to 9:00 and the flashlight to 6:00.
+7. Moves the belt radio from 8:00 to 9:00, then moves the campus key ring from 10:00 to the newly open 8:00 position.
 8. Saves the hypothetical loadout.
 9. Opens Team View to show the saved changes on the technician mannequin.
 10. Opens Excel Export and simulates preparation of the Current Technician Loadout workbook without forcing a file download.
