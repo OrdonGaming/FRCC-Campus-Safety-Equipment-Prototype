@@ -1,5 +1,5 @@
 const AUTO_DEMO_TIMING_SCALE = 1;
-const AUTO_DEMO_PATCH_BUILD = '0.10.3';
+const AUTO_DEMO_PATCH_BUILD = '0.11.0';
 
 // Build 0.10.2 moved the approximately one-minute pacing into home.js.
 // Keep this compatibility layer at 1x so timing is not doubled a second time.
@@ -10,9 +10,8 @@ if (typeof waitForDemo === 'function' && AUTO_DEMO_TIMING_SCALE !== 1) {
     };
 }
 
-// Replace the second belt demonstration with the campus key ring. This avoids
-// moving the flashlight and also uses the 8:00 position that becomes available
-// after the radio moves from 8:00 to 9:00 in the previous step.
+// Preserve the corrected second belt demonstration: move the campus key ring
+// from 10:00 to the newly open 8:00 position after the radio moves to 9:00.
 if (typeof demoStep === 'function') {
     const baseDemoStepForBeltExample = demoStep;
     demoStep = async function demoStepWithKeyRingExample(stepNumber, totalSteps, label, status, target, action, hold = 900) {
@@ -36,6 +35,17 @@ if (typeof demoStep === 'function') {
 
         return baseDemoStepForBeltExample(stepNumber, totalSteps, label, status, target, action, hold);
     };
+}
+
+function loadMannequinRedesignStyles() {
+    const existing = document.querySelector('link[data-mannequin-redesign]');
+    if (existing) return;
+
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = `mannequin-v2.css?v=${AUTO_DEMO_PATCH_BUILD}`;
+    link.dataset.mannequinRedesign = 'true';
+    document.head.appendChild(link);
 }
 
 function applyAutoDemoPatchBuildLabel() {
@@ -67,4 +77,5 @@ if (typeof overviewRows === 'function') {
     };
 }
 
+loadMannequinRedesignStyles();
 applyAutoDemoPatchBuildLabel();
