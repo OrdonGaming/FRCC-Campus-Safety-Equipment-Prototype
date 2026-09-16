@@ -39,31 +39,11 @@ This prototype uses the approved Front Range Community College color and typogra
 
 ## Current interactive build
 
-Build 0.11.1 includes the Technician Loadout workflow, functional demo role/permission system, client-side Excel reporting, a presentation-ready Home screen, an automatic guided demo, the 0.11.0 loadout mannequin redesign, and a new operator-card visual system for Team View.
+Build 0.11.0 includes the Technician Loadout workflow, enhanced Larimer Team View, functional demo role/permission system, client-side Excel reporting, a presentation-ready Home screen, an automatic guided demo, and a stronger concept-art-inspired mannequin visual redesign.
 
-### Team View Operator Cards
+### Mannequin Visual Redesign
 
-Build 0.11.1 specifically redesigns the Team View to move away from simple diagram-style mannequins and toward the polished vertical character-card presentation used in the visual concept direction.
-
-- Each team member is presented in a vertical operator-style card with a full-body neutral Campus Safety figure
-- The figure uses a more natural standing pose with bent forearms and hands positioned together near the duty belt
-- Refined LAPD-blue polo, neutral faceless head, khaki cargo pants, black footwear, and more integrated duty gear
-- Soft, intentionally blurred campus-like background treatment behind each figure
-- Compact white information plate beneath the figure showing name, role, duty status, and active loadout
-- Role and loadout labels integrated into the visual card rather than floating below the mannequin
-- Existing hat, vest, mic, name badge, sleeve tools, patch, footwear, and belt-equipment state still reflect each technician's saved loadout
-- Saved duty-belt clock positions remain visually represented on each figure
-- Supervisor remains visually emphasized in the center, with Technician IV immediately to the Supervisor's right
-- Technician IIIs remain balanced around the leadership positions
-- Open positions remain grouped at the far right and now use a ghosted/outlined version of the same operator-card system
-- The older duplicate detail-card row is hidden because the operator cards now contain the important identity and status information directly
-- Clicking a filled operator card still opens that technician's active loadout
-
-The Team View redesign is presentation-only. Team ordering, permissions, inventory, loadouts, Excel exports, local storage, and automated-demo behavior are unchanged.
-
-### Technician Loadout Mannequin
-
-Build 0.11.0 substantially reworked the individual loadout mannequin presentation while keeping the underlying prototype behavior unchanged.
+Build 0.11.0 substantially reworks the mannequin presentation while keeping the underlying prototype behavior unchanged.
 
 - Taller, cleaner technician silhouette with less blocky proportions
 - More dimensional neutral head and body treatment while remaining a non-realistic display mannequin
@@ -73,6 +53,11 @@ Build 0.11.0 substantially reworked the individual loadout mannequin presentatio
 - More polished duty belt with buckle and keeper details
 - Refined hats, beanies, badge, mic, patch, and duty-gear presentation
 - Improved mannequin stage with a presentation-style floor/platform treatment
+- Team mannequins use the same visual language as the individual loadout mannequin
+- Open positions now use a deliberate outlined/ghosted mannequin instead of simply dimming a normal team member
+- Supervisor hierarchy is visually emphasized without changing body shape or implying a different type of person
+
+The redesign is implemented as a presentation layer only. Loadouts, inventory behavior, permissions, Excel exports, local storage, and the automatic demo continue to use the same data and logic.
 
 ### Technician Loadout
 
@@ -95,6 +80,21 @@ Build 0.11.0 substantially reworked the individual loadout mannequin presentatio
 - Hypothetical loadouts that save without reserving or changing inventory
 - Browser `localStorage` persistence
 - Reset Demo Data
+
+### Team View
+
+- Variable team sizes with the lineup automatically centered
+- Supervisor presented at front center
+- Technician IV positioned to the Supervisor's right
+- Technician IIIs balanced around the two lead positions
+- Open positions always placed at the far right of the lineup
+- Team mannequins reflect each technician's currently saved loadout
+- Hat, vest, mic, badge, sleeve tools, patch, footwear, and belt gear are represented on the team mannequins
+- Saved duty-belt clock positions are reflected in each team mannequin
+- On-duty and off-duty visual states
+- Staffing summary showing filled, on-duty, off-duty, and open positions
+- Technician cards showing role, active loadout, status, and equipped-item count
+- Clicking a technician mannequin or card opens that technician's loadout directly
 
 ### Demo Roles & Permissions
 
@@ -136,7 +136,7 @@ The sequence:
 6. Changes footwear to the available black laced boots.
 7. Moves the belt radio from 8:00 to 9:00, then moves the campus key ring from 10:00 to the newly open 8:00 position.
 8. Saves the hypothetical loadout.
-9. Opens Team View to show the saved changes on the technician operator card.
+9. Opens Team View to show the saved changes on the technician mannequin.
 10. Opens Excel Export and simulates preparation of the Current Technician Loadout workbook without forcing a file download.
 11. Returns to the Home screen.
 

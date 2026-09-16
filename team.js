@@ -15,7 +15,7 @@ function getTeamItemName(loadout, slotId) {
 }
 
 function getTeamMannequinClasses(technician, loadout) {
-    const classes = ['team-mannequin', 'team-loadout-mannequin', 'operator-figure'];
+    const classes = ['team-mannequin', 'team-loadout-mannequin'];
     const assignments = loadout?.assignments || {};
 
     const hatName = getTeamItemName(loadout, 'hat').toLowerCase();
@@ -56,11 +56,8 @@ function enhancedTeamMannequinMarkup(technician, loadout) {
 
     return `
         <div class="${classes}" aria-hidden="true">
-            <div class="figure-shadow"></div>
-            <div class="head"><span class="team-cap-label">CS</span></div>
-            <div class="neck"></div>
+            <div class="head"></div>
             <div class="torso">
-                <span class="team-shirt-logo">CAMPUS<br>SAFETY</span>
                 <span class="team-vest"></span>
                 <span class="team-patch"></span>
                 <span class="team-mic"></span>
@@ -68,10 +65,6 @@ function enhancedTeamMannequinMarkup(technician, loadout) {
             </div>
             <div class="arm left"><span class="team-sleeve-tools"></span></div>
             <div class="arm right"></div>
-            <div class="forearm left"></div>
-            <div class="forearm right"></div>
-            <div class="hand left"></div>
-            <div class="hand right"></div>
             <div class="team-duty-belt"></div>
             ${getTeamBeltGearMarkup(loadout)}
             <div class="leg left"></div>
@@ -84,22 +77,13 @@ function enhancedTeamMannequinMarkup(technician, loadout) {
 
 function openTeamMannequinMarkup() {
     return `
-        <div class="team-mannequin open-team-mannequin operator-figure" aria-hidden="true">
-            <div class="figure-shadow"></div>
+        <div class="team-mannequin open-team-mannequin" aria-hidden="true">
             <div class="head"></div>
-            <div class="neck"></div>
             <div class="torso"></div>
             <div class="arm left"></div>
             <div class="arm right"></div>
-            <div class="forearm left"></div>
-            <div class="forearm right"></div>
-            <div class="hand left"></div>
-            <div class="hand right"></div>
-            <div class="team-duty-belt"></div>
             <div class="leg left"></div>
             <div class="leg right"></div>
-            <div class="team-shoe left"></div>
-            <div class="team-shoe right"></div>
         </div>
     `;
 }
@@ -163,64 +147,6 @@ function openTechnicianFromTeam(technicianId) {
     showToast(`Opened ${technician?.name || 'technician'} · ${currentLoadoutName}.`);
 }
 
-function operatorRoleTag(role) {
-    if (role === 'Supervisor') return 'SUPV';
-    if (role === 'Technician IV') return 'TECH IV';
-    if (role === 'Technician III') return 'TECH III';
-    return role || 'TEAM';
-}
-
-function operatorCardMarkup(item) {
-    if (item.type === 'open') {
-        const role = item.role || 'Technician III';
-        return `
-            <article class="team-member operator-card open-position" aria-label="Open ${escapeHtml(role)} position">
-                <div class="operator-card-visual">
-                    <span class="operator-loadout-tag">Vacant</span>
-                    <span class="operator-rank-tag">${escapeHtml(operatorRoleTag(role))}</span>
-                    ${openTeamMannequinMarkup()}
-                </div>
-                <div class="operator-info-plate">
-                    <div class="operator-name">Open Position</div>
-                    <div class="operator-role">${escapeHtml(role)}</div>
-                    <div class="operator-meta">
-                        <span class="operator-status">Vacant</span>
-                        <span class="operator-loadout-name">No loadout assigned</span>
-                    </div>
-                </div>
-            </article>
-        `;
-    }
-
-    const loadout = getTechnicianDisplayLoadout(item.tech);
-    const loadoutType = loadout.type === 'issued' ? 'Issued' : 'Saved';
-    const statusClass = item.tech.status === 'On Duty' ? 'status-on-duty' : 'status-off-duty';
-
-    return `
-        <article
-            class="team-member operator-card team-member-interactive ${memberClass(item.tech.role, item.type)} ${statusClass}"
-            data-technician-id="${escapeHtml(item.tech.id)}"
-            tabindex="0"
-            role="button"
-            aria-label="Open ${escapeHtml(item.tech.name)} ${escapeHtml(item.tech.loadout)} loadout"
-        >
-            <div class="operator-card-visual">
-                <span class="operator-loadout-tag" title="${escapeHtml(item.tech.loadout)}">${escapeHtml(item.tech.loadout)}</span>
-                <span class="operator-rank-tag">${escapeHtml(operatorRoleTag(item.tech.role))}</span>
-                ${enhancedTeamMannequinMarkup(item.tech, loadout)}
-            </div>
-            <div class="operator-info-plate">
-                <div class="operator-name">${escapeHtml(item.tech.name)}</div>
-                <div class="operator-role">${escapeHtml(item.tech.role)}</div>
-                <div class="operator-meta">
-                    <span class="operator-status ${statusClass}">${escapeHtml(item.tech.status)}</span>
-                    <span class="operator-loadout-name">${loadoutType} · ${escapeHtml(item.tech.loadout)}</span>
-                </div>
-            </div>
-        </article>
-    `;
-}
-
 renderTeam = function renderEnhancedTeam() {
     const { filled, open, arranged } = arrangeTeamPositions();
     const onDuty = filled.filter(item => item.tech.status === 'On Duty').length;
@@ -235,7 +161,38 @@ renderTeam = function renderEnhancedTeam() {
         `;
     }
 
-    teamLineup.innerHTML = arranged.map(operatorCardMarkup).join('');
+    teamLineup.innerHTML = arranged.map(item => {
+        if (item.type === 'open') {
+            return `
+                <article class="team-member open-position" aria-label="Open ${escapeHtml(item.role || 'Technician III')} position">
+                    ${openTeamMannequinMarkup()}
+                    <div class="member-name">Open Position</div>
+                    <div class="member-role">${escapeHtml(item.role || 'Technician III')}</div>
+                    <div class="member-loadout open-loadout-label">Open Position</div>
+                </article>
+            `;
+        }
+
+        const loadout = getTechnicianDisplayLoadout(item.tech);
+        const loadoutType = loadout.type === 'issued' ? 'Issued' : 'Saved';
+        const statusClass = item.tech.status === 'On Duty' ? 'status-on-duty' : 'status-off-duty';
+
+        return `
+            <article
+                class="team-member team-member-interactive ${memberClass(item.tech.role, item.type)} ${statusClass}"
+                data-technician-id="${escapeHtml(item.tech.id)}"
+                tabindex="0"
+                role="button"
+                aria-label="Open ${escapeHtml(item.tech.name)} ${escapeHtml(item.tech.loadout)} loadout"
+            >
+                ${enhancedTeamMannequinMarkup(item.tech, loadout)}
+                <div class="member-name">${escapeHtml(item.tech.name)}</div>
+                <div class="member-role">${escapeHtml(item.tech.role)}</div>
+                <div class="member-loadout">${escapeHtml(item.tech.loadout)} <span>· ${loadoutType}</span></div>
+                <div class="member-status ${statusClass}">${escapeHtml(item.tech.status)}</div>
+            </article>
+        `;
+    }).join('');
 
     teamCards.innerHTML = arranged.map(item => {
         if (item.type === 'open') {
