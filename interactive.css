@@ -1,3 +1,10 @@
+.panel-help {
+    margin: 6px 0 0;
+    color: var(--muted);
+    font-size: .72rem;
+    line-height: 1.35;
+}
+
 .interactive-slot {
     cursor: pointer;
     position: relative;
@@ -14,8 +21,22 @@
 
 .interactive-slot.selected-slot {
     border-color: var(--frcc-blue);
-    background: #f3f6ff;
-    box-shadow: 0 0 0 3px rgba(13, 45, 108, .12);
+    background: #eef3ff;
+    box-shadow: 0 0 0 4px rgba(13, 45, 108, .16);
+}
+
+.interactive-slot.selected-slot::after {
+    content: "SELECTED";
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 3px 6px;
+    border-radius: 999px;
+    background: var(--frcc-blue);
+    color: white;
+    font-size: .56rem;
+    font-weight: 900;
+    letter-spacing: .08em;
 }
 
 .interactive-slot.dirty-slot {
