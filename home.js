@@ -1,6 +1,7 @@
-const HOME_BUILD = '0.10.0';
+const HOME_BUILD = '0.10.2';
 const AUTO_DEMO_TECHNICIAN_ID = 'tech-003';
 const AUTO_DEMO_LOADOUT_NAME = 'Automated Demo Loadout';
+const AUTO_DEMO_TIME_SCALE = 2;
 
 const homeFilledCount = document.getElementById('home-filled-count');
 const homeOpenCount = document.getElementById('home-open-count');
@@ -275,7 +276,7 @@ function ensureAutoDemoUi() {
 }
 
 function waitForDemo(milliseconds) {
-    return new Promise(resolve => window.setTimeout(resolve, milliseconds));
+    return new Promise(resolve => window.setTimeout(resolve, Math.round(milliseconds * AUTO_DEMO_TIME_SCALE)));
 }
 
 function throwIfDemoCancelled() {
@@ -499,12 +500,12 @@ async function startAutomatedDemo() {
             moveSelectedBeltItem('9:00');
         }, 850);
 
-        await demoStep(9, totalSteps, 'Move Flashlight', 'Moving the flashlight to the open 6:00 belt position to demonstrate a second belt-layout change.', () => document.querySelector('[data-slot-id="flashlight"]'), async () => {
+        await demoStep(9, totalSteps, 'Move Flashlight', 'Moving the flashlight to the open 8:00 belt position to demonstrate a second belt-layout change.', () => document.querySelector('[data-slot-id="flashlight"]'), async () => {
             selectSlot('flashlight');
             await waitForDemo(450);
-            await focusDemoTarget(() => document.querySelector('[data-position="6:00"]'));
+            await focusDemoTarget(() => document.querySelector('[data-position="8:00"]'));
             await waitForDemo(350);
-            moveSelectedBeltItem('6:00');
+            moveSelectedBeltItem('8:00');
         }, 850);
 
         await demoStep(10, totalSteps, 'Save Loadout', 'Saving the hypothetical loadout. Because this is a saved planning loadout, it does not reserve or reassign inventory.', '#save-button', async () => {
