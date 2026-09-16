@@ -1,0 +1,131 @@
+.export-intro {
+    margin-bottom: 18px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.export-intro-copy {
+    max-width: 760px;
+}
+
+.export-intro-copy h3 {
+    margin: 0 0 6px;
+    color: var(--frcc-blue);
+}
+
+.export-intro-copy p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.export-library-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    font-size: .72rem;
+    font-weight: 900;
+    background: #f3f5f8;
+    color: var(--muted);
+    border: 1px solid var(--line);
+}
+
+.export-library-status::before {
+    content: "●";
+    font-size: .7rem;
+}
+
+.export-library-status.ready {
+    color: var(--success);
+    background: #edf8f0;
+    border-color: #cfe8d6;
+}
+
+.export-library-status.error {
+    color: var(--danger);
+    background: #fff2f2;
+    border-color: #efcece;
+}
+
+.export-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.export-card {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.export-card h3 {
+    margin: 0;
+    color: var(--frcc-blue);
+}
+
+.export-card p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.export-card ul {
+    margin: 0;
+    padding-left: 19px;
+    color: var(--muted);
+    display: grid;
+    gap: 5px;
+    font-size: .86rem;
+}
+
+.export-card .button {
+    margin-top: auto;
+    align-self: flex-start;
+}
+
+.export-card.featured {
+    border-color: rgba(13, 45, 108, .34);
+    box-shadow: 0 14px 34px rgba(13, 45, 108, .12);
+}
+
+.export-card.featured::before {
+    content: "Recommended";
+    align-self: flex-start;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: var(--frcc-gold);
+    color: #18233f;
+    font-size: .65rem;
+    font-weight: 1000;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+}
+
+.export-note {
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px dashed var(--frcc-sky);
+    background: #f7fbfd;
+    color: var(--muted);
+    font-size: .82rem;
+    line-height: 1.5;
+}
+
+.export-note strong {
+    color: var(--frcc-blue);
+}
+
+@media (max-width: 900px) {
+    .export-grid {
+        grid-template-columns: 1fr;
+    }
+}
