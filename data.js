@@ -15,15 +15,15 @@ const demoEquipmentSlots = [
     { id: 'name-badge', label: 'Name Badge', defaultItem: 'Campus Safety Name Badge', category: 'Identification', assetPrefix: 'NB', required: true },
     { id: 'left-sleeve', label: 'Left Sleeve', defaultItem: 'Pen / Sharpie / Handcuff Key Set', category: 'Duty Gear', assetPrefix: 'SL', required: true },
     { id: 'patch', label: 'Right Shoulder', defaultItem: 'Campus Safety Patch', category: 'Uniform', assetPrefix: 'PCH', required: true },
-    { id: 'radio', label: 'Belt Radio', defaultItem: 'Motorola Radio', category: 'Radio', assetPrefix: 'R', required: true },
-    { id: 'keys', label: 'Keys', defaultItem: 'Campus Key Ring', category: 'Access', assetPrefix: 'K', required: true },
-    { id: 'access-card', label: 'Access Card', defaultItem: 'Campus Access Card', category: 'Access', assetPrefix: 'AC', required: true },
-    { id: 'flashlight', label: 'Flashlight', defaultItem: 'Duty Flashlight', category: 'Duty Gear', assetPrefix: 'F', required: true },
-    { id: 'gloves', label: 'Gloves Pouch', defaultItem: 'Gloves Pouch', category: 'Medical', assetPrefix: 'G', required: true },
-    { id: 'handcuffs', label: 'Handcuffs', defaultItem: 'Handcuffs', category: 'Duty Gear', assetPrefix: 'H', required: true },
-    { id: 'tourniquet', label: 'Tourniquet', defaultItem: 'Tourniquet Kit', category: 'Medical', assetPrefix: 'TQ', required: true },
-    { id: 'cpr', label: 'CPR Kit', defaultItem: 'CPR Barrier Kit', category: 'Medical', assetPrefix: 'CPR', required: true },
-    { id: 'baton', label: 'Baton', defaultItem: 'Duty Baton', category: 'Duty Gear', assetPrefix: 'B', required: true },
+    { id: 'radio', label: 'Belt Radio', defaultItem: 'Motorola Radio', category: 'Radio', assetPrefix: 'R', required: true, beltMounted: true },
+    { id: 'keys', label: 'Keys', defaultItem: 'Campus Key Ring', category: 'Access', assetPrefix: 'K', required: true, beltMounted: true },
+    { id: 'access-card', label: 'Access Card', defaultItem: 'Campus Access Card', category: 'Access', assetPrefix: 'AC', required: true, beltMounted: true },
+    { id: 'flashlight', label: 'Flashlight', defaultItem: 'Duty Flashlight', category: 'Duty Gear', assetPrefix: 'F', required: true, beltMounted: true },
+    { id: 'gloves', label: 'Gloves Pouch', defaultItem: 'Gloves Pouch', category: 'Medical', assetPrefix: 'G', required: true, beltMounted: true },
+    { id: 'handcuffs', label: 'Handcuffs', defaultItem: 'Handcuffs', category: 'Duty Gear', assetPrefix: 'H', required: true, beltMounted: true },
+    { id: 'tourniquet', label: 'Tourniquet', defaultItem: 'Tourniquet Kit', category: 'Medical', assetPrefix: 'TQ', required: true, beltMounted: true },
+    { id: 'cpr', label: 'CPR Kit', defaultItem: 'CPR Barrier Kit', category: 'Medical', assetPrefix: 'CPR', required: true, beltMounted: true },
+    { id: 'baton', label: 'Baton', defaultItem: 'Duty Baton', category: 'Duty Gear', assetPrefix: 'B', required: true, beltMounted: true },
     { id: 'pants', label: 'Uniform Pants', defaultItem: 'Khaki 5.11 Cargo Pants', category: 'Uniform', assetPrefix: 'P', required: true },
     { id: 'footwear', label: 'Footwear', defaultItem: 'Black Laced Shoes', category: 'Uniform', assetPrefix: 'S', required: true }
 ];
@@ -39,19 +39,31 @@ const demoTeamPositions = [
 ];
 
 const demoBeltPositions = [
-    { position: '1:00', slotId: 'tourniquet' },
-    { position: '2:00', slotId: 'flashlight' },
-    { position: '3:00', slotId: 'baton' },
-    { position: '4:00', slotId: 'gloves' },
-    { position: '5:00', slotId: 'handcuffs' },
-    { position: '6:00', slotId: null },
-    { position: '7:00', slotId: 'cpr' },
-    { position: '8:00', slotId: 'radio' },
-    { position: '9:00', slotId: null },
-    { position: '10:00', slotId: 'keys' },
-    { position: '11:00', slotId: 'access-card' },
-    { position: '12:00', slotId: null }
+    { position: '1:00' },
+    { position: '2:00' },
+    { position: '3:00' },
+    { position: '4:00' },
+    { position: '5:00' },
+    { position: '6:00' },
+    { position: '7:00' },
+    { position: '8:00' },
+    { position: '9:00' },
+    { position: '10:00' },
+    { position: '11:00' },
+    { position: '12:00' }
 ];
+
+const demoDefaultBeltLayout = {
+    tourniquet: '1:00',
+    flashlight: '2:00',
+    baton: '3:00',
+    gloves: '4:00',
+    handcuffs: '5:00',
+    cpr: '7:00',
+    radio: '8:00',
+    keys: '10:00',
+    'access-card': '11:00'
+};
 
 const demoInventory = [];
 const issuedAssignments = {};
@@ -116,11 +128,31 @@ demoTechnicians.forEach(technician => {
     event.footwear = 'LC-S-SP02';
 
     demoLoadouts[technician.id] = {
-        'Issued Loadout': { type: 'issued', assignments: issued },
-        'Closing': { type: 'hypothetical', assignments: closing },
-        'Event': { type: 'hypothetical', assignments: event },
-        'Winter': { type: 'hypothetical', assignments: winter },
-        'Test Setup': { type: 'hypothetical', assignments: testSetup }
+        'Issued Loadout': {
+            type: 'issued',
+            assignments: issued,
+            beltLayout: cloneAssignments(demoDefaultBeltLayout)
+        },
+        'Closing': {
+            type: 'hypothetical',
+            assignments: closing,
+            beltLayout: cloneAssignments(demoDefaultBeltLayout)
+        },
+        'Event': {
+            type: 'hypothetical',
+            assignments: event,
+            beltLayout: cloneAssignments(demoDefaultBeltLayout)
+        },
+        'Winter': {
+            type: 'hypothetical',
+            assignments: winter,
+            beltLayout: cloneAssignments(demoDefaultBeltLayout)
+        },
+        'Test Setup': {
+            type: 'hypothetical',
+            assignments: testSetup,
+            beltLayout: cloneAssignments(demoDefaultBeltLayout)
+        }
     };
 });
 
@@ -129,6 +161,7 @@ const demoData = {
     teamPositions: demoTeamPositions,
     equipmentSlots: demoEquipmentSlots,
     beltPositions: demoBeltPositions,
+    defaultBeltLayout: demoDefaultBeltLayout,
     inventory: demoInventory,
     loadouts: demoLoadouts
 };
