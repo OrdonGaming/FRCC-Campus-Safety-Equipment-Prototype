@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="FRCC Campus Safety Equipment Dashboard Larimer Campus proof-of-concept">
     <title>FRCC Campus Safety Equipment Dashboard</title>
-    <link rel="stylesheet" href="styles.css?v=0.10.0">
-    <link rel="stylesheet" href="interactive.css?v=0.10.0">
-    <link rel="stylesheet" href="team.css?v=0.10.0">
-    <link rel="stylesheet" href="permissions.css?v=0.10.0">
-    <link rel="stylesheet" href="export.css?v=0.10.0">
-    <link rel="stylesheet" href="polish.css?v=0.10.0">
+    <link rel="stylesheet" href="styles.css?v=0.10.1">
+    <link rel="stylesheet" href="interactive.css?v=0.10.1">
+    <link rel="stylesheet" href="team.css?v=0.10.1">
+    <link rel="stylesheet" href="permissions.css?v=0.10.1">
+    <link rel="stylesheet" href="export.css?v=0.10.1">
+    <link rel="stylesheet" href="polish.css?v=0.10.1">
 </head>
 <body class="home-active">
     <div class="app-shell">
@@ -75,7 +75,7 @@
                             <p>A videogame-inspired equipment management concept designed to make technician loadouts, team readiness, inventory status, and equipment assignments easier to understand at a glance.</p>
 
                             <div class="home-actions">
-                                <button class="button gold" id="home-start-demo" title="Play the automatic prototype walkthrough">Start Demo</button>
+                                <button class="button gold" id="home-start-demo" title="Play the approximately one-minute automatic prototype walkthrough">Start Demo</button>
                                 <button class="button primary" data-home-view="loadout-view">Open Technician Loadout</button>
                                 <button class="button secondary" data-home-view="team-view">View Larimer Team</button>
                             </div>
@@ -89,7 +89,7 @@
                                     <div class="home-status-row"><span>Demo role</span><strong id="home-role-value">Supervisor</strong></div>
                                     <div class="home-status-row"><span>Viewing</span><strong id="home-tech-value">Jordan Davis</strong></div>
                                     <div class="home-status-row"><span>Inventory</span><strong id="home-inventory-value">—</strong></div>
-                                    <div class="home-status-row"><span>Build</span><strong id="home-build-value">0.10.0</strong></div>
+                                    <div class="home-status-row"><span>Build</span><strong id="home-build-value">0.10.1</strong></div>
                                 </div>
                             </div>
                             <div class="home-prototype-note">This demonstration uses fictional or sanitized data and local browser storage only. It is not connected to live FRCC personnel, access-control, or inventory systems.</div>
@@ -146,7 +146,7 @@
                         <div class="demo-walkthrough-copy">
                             <p class="eyebrow">Automatic presentation flow</p>
                             <h3>Press Start Demo and watch the workflow</h3>
-                            <p>The automatic demo plays through the major prototype features like a short guided movie. It uses one temporary example loadout, replaces any previous automated example before starting, and returns here when it is finished.</p>
+                            <p>The automatic demo plays through the major prototype features like a guided movie in about one minute. It uses one temporary example loadout, replaces any previous automated example before starting, and returns here when it is finished.</p>
                         </div>
                         <div class="demo-steps">
                             <div class="demo-step"><div class="demo-step-number">1</div><div><strong>Supervisor access.</strong><span>The demo switches to Supervisor permissions and opens a Technician III loadout.</span></div></div>
@@ -346,19 +346,20 @@
 
             <footer class="footer">
                 <span>FRCC Campus Safety Equipment Dashboard</span>
-                <span>Proof of Concept · Local demo data only · Build 0.10.0</span>
+                <span>Proof of Concept · Local demo data only · Build 0.10.1</span>
             </footer>
         </div>
     </div>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-    <script src="data.js?v=0.10.0"></script>
-    <script src="app.js?v=0.10.0"></script>
-    <script src="team.js?v=0.10.0"></script>
-    <script src="permissions.js?v=0.10.0"></script>
+    <script src="data.js?v=0.10.1"></script>
+    <script src="app.js?v=0.10.1"></script>
+    <script src="team.js?v=0.10.1"></script>
+    <script src="permissions.js?v=0.10.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-    <script src="export.js?v=0.10.0"></script>
-    <script src="home.js?v=0.10.0"></script>
+    <script src="export.js?v=0.10.1"></script>
+    <script src="home.js?v=0.10.1"></script>
+    <script src="demo-timing.js?v=0.10.1"></script>
 </body>
 </html>
