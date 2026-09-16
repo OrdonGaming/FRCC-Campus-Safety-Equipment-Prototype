@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FRCC Campus Safety Equipment Dashboard Larimer Campus proof-of-concept">
+    <title>FRCC Campus Safety Equipment Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar" aria-label="Primary navigation">
+            <div class="brand-block">
+                <div class="brand-mark" aria-hidden="true">FRCC</div>
+                <div>
+                    <div class="brand-name">Front Range</div>
+                    <div class="brand-subtitle">Community College</div>
+                </div>
+            </div>
+
+            <div class="department-label">Campus Safety</div>
+
+            <nav class="nav-list">
+                <button class="nav-button active" data-view="loadout-view">Technician Loadout</button>
+                <button class="nav-button" data-view="team-view">Team View</button>
+                <button class="nav-button" data-view="inventory-view">Inventory</button>
+            </nav>
+
+            <div class="sidebar-spacer"></div>
+
+            <button class="nav-button muted" id="reset-demo-button">Reset Demo Data</button>
+            <div class="prototype-badge">Larimer Campus Prototype</div>
+        </aside>
+
+        <div class="workspace">
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">Larimer Campus</p>
+                    <h1>Equipment Dashboard</h1>
+                </div>
+
+                <div class="topbar-controls">
+                    <label class="control-group">
+                        <span>Demo Role</span>
+                        <select id="role-select">
+                            <option>Technician III</option>
+                            <option>Technician IV</option>
+                            <option selected>Supervisor</option>
+                            <option>Admin</option>
+                        </select>
+                    </label>
+
+                    <label class="control-group">
+                        <span>Technician</span>
+                        <select id="technician-select"></select>
+                    </label>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <section id="loadout-view" class="view active-view" aria-labelledby="loadout-title">
+                    <div class="section-heading">
+                        <div>
+                            <p class="eyebrow">Individual equipment</p>
+                            <h2 id="loadout-title">Technician Loadout</h2>
+                        </div>
+                        <div class="loadout-picker">
+                            <span>Loadout</span>
+                            <select id="loadout-select">
+                                <option>Issued Loadout</option>
+                                <option>Closing</option>
+                                <option>Event</option>
+                                <option>Winter</option>
+                                <option>Test Setup</option>
+                            </select>
+                            <button class="text-button" id="new-loadout-button">+ New Loadout</button>
+                        </div>
+                    </div>
+
+                    <div class="loadout-layout">
+                        <section class="panel equipment-panel" aria-label="Equipment slots">
+                            <div class="panel-heading">
+                                <div>
+                                    <p class="eyebrow">Equipped</p>
+                                    <h3>Equipment Slots</h3>
+                                </div>
+                                <span class="status-pill success">Complete</span>
+                            </div>
+
+                            <div class="slot-grid" id="slot-grid"></div>
+                        </section>
+
+                        <section class="panel mannequin-panel" aria-label="Technician mannequin">
+                            <div class="mannequin-stage">
+                                <div class="mannequin" aria-label="Neutral Campus Safety mannequin">
+                                    <div class="mannequin-head"></div>
+                                    <div class="mannequin-neck"></div>
+                                    <div class="mannequin-torso">
+                                        <div class="polo-collar"></div>
+                                        <span class="uniform-label">CAMPUS SAFETY</span>
+                                    </div>
+                                    <div class="mannequin-arm left-arm"></div>
+                                    <div class="mannequin-arm right-arm"></div>
+                                    <div class="duty-belt"></div>
+                                    <div class="mannequin-leg left-leg"></div>
+                                    <div class="mannequin-leg right-leg"></div>
+                                    <div class="mannequin-shoe left-shoe"></div>
+                                    <div class="mannequin-shoe right-shoe"></div>
+                                </div>
+                            </div>
+
+                            <div class="belt-clock">
+                                <p class="eyebrow">Duty belt positions</p>
+                                <div class="clock-row" id="belt-clock-row"></div>
+                            </div>
+                        </section>
+
+                        <section class="panel inventory-panel" aria-label="Available inventory">
+                            <div class="panel-heading">
+                                <div>
+                                    <p class="eyebrow">Larimer inventory</p>
+                                    <h3>Available Equipment</h3>
+                                </div>
+                                <span id="inventory-count" class="status-pill"></span>
+                            </div>
+
+                            <label class="search-box">
+                                <span class="sr-only">Search equipment</span>
+                                <input id="inventory-search" type="search" placeholder="Search equipment...">
+                            </label>
+
+                            <div class="inventory-list" id="inventory-list"></div>
+                        </section>
+                    </div>
+
+                    <div class="action-bar">
+                        <button class="button secondary" id="discard-button">Discard</button>
+                        <button class="button secondary" id="save-as-button">Save As</button>
+                        <button class="button primary" id="save-button">Save Loadout</button>
+                    </div>
+                </section>
+
+                <section id="team-view" class="view" aria-labelledby="team-title">
+                    <div class="section-heading">
+                        <div>
+                            <p class="eyebrow">Larimer Campus</p>
+                            <h2 id="team-title">Team View</h2>
+                            <p class="section-description">The lineup automatically centers the active team. Vacant positions remain at the far right.</p>
+                        </div>
+                    </div>
+
+                    <section class="team-stage panel">
+                        <div class="team-lineup" id="team-lineup"></div>
+                    </section>
+
+                    <section class="team-cards" id="team-cards"></section>
+                </section>
+
+                <section id="inventory-view" class="view" aria-labelledby="inventory-title">
+                    <div class="section-heading">
+                        <div>
+                            <p class="eyebrow">Larimer Campus</p>
+                            <h2 id="inventory-title">Inventory</h2>
+                            <p class="section-description">Prototype inventory data only. No live Campus Safety asset records are stored here.</p>
+                        </div>
+                    </div>
+                    <section class="panel inventory-table-panel">
+                        <div id="inventory-table"></div>
+                    </section>
+                </section>
+            </main>
+
+            <footer class="footer">
+                <span>FRCC Campus Safety Equipment Dashboard</span>
+                <span>Proof of Concept · Local demo data only</span>
+            </footer>
+        </div>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
