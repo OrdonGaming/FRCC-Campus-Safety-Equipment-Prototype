@@ -16,6 +16,7 @@ A zero-cost proof-of-concept for a videogame-inspired Campus Safety equipment da
 - Demo user roles and permissions
 - Local browser storage only
 - Client-side Excel export
+- A polished presentation flow suitable for sharing as a proof of concept
 
 ## Prototype constraints
 
@@ -34,13 +35,27 @@ Only fictional or sanitized demonstration personnel and inventory data should be
 
 ## Branding
 
-This prototype uses approved Front Range Community College branding.
+This prototype uses approved Front Range Community College branding colors and typography direction.
 
-Official FRCC logo artwork should be added from approved source files and should not be recreated, distorted, recolored, or modified.
+Official FRCC logo artwork should be added from an approved source file and should not be recreated, distorted, recolored, or modified. Until that asset is supplied, the sidebar uses a temporary text-only FRCC mark.
 
 ## Current interactive build
 
-Build 0.8.0 includes the Technician Loadout workflow, enhanced Larimer Team View, functional demo role/permission system, and client-side Excel reporting.
+Build 0.9.0 includes the Technician Loadout workflow, enhanced Larimer Team View, functional demo role/permission system, client-side Excel reporting, and a polished prototype landing experience.
+
+### Presentation Home
+
+Build 0.9.0 adds a dedicated Home view designed for demonstrations and external proof-of-concept review.
+
+- Opens as the default page when the prototype loads
+- Presents the prototype purpose before exposing operational controls
+- Shows filled positions, open positions, available inventory, and saved loadout counts
+- Displays the current demo role, currently viewed technician, inventory summary, and build number
+- Provides direct navigation into Technician Loadout, Team View, Inventory, and Excel Export
+- Includes a **Start Demo** action that switches to Supervisor mode and opens the Larimer Team View
+- Includes a short suggested FireFly presentation sequence
+- Clearly identifies that the prototype uses fictional/sanitized data and local browser storage
+- Uses FRCC blue, white, gold accents, and Roboto/Roboto Condensed as the approved free typography alternative
 
 ### Technician Loadout
 
@@ -96,7 +111,7 @@ These permission defaults are for demonstration only. A production version would
 
 ### Excel Export
 
-Build 0.8.0 adds an Excel Export view. Reports are generated in the user's browser and downloaded as `.xlsx` files.
+Reports are generated in the user's browser and downloaded as `.xlsx` files.
 
 - **Full Prototype Workbook** includes overview, inventory, available inventory, technician roster, team positions, team equipment, and every saved/issued loadout.
 - **Inventory Report** includes all prototype inventory and a separate available-inventory sheet.
@@ -107,4 +122,4 @@ Build 0.8.0 adds an Excel Export view. Reports are generated in the user's brows
 
 ## Status
 
-Interactive Larimer Campus proof-of-concept in active development. Presentation polish, approved logo integration, and final demonstration cleanup remain planned prototype stages.
+Build 0.9.0 is presentation-ready for continued prototype review. Remaining polish includes replacing the temporary FRCC text mark with the approved official logo asset and any visual/content refinements identified during demonstration testing.
