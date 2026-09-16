@@ -40,7 +40,7 @@ Official FRCC logo artwork should be added from approved source files and should
 
 ## Current interactive build
 
-Build 0.6.0 includes the interactive Technician Loadout workflow plus an enhanced Larimer Team View.
+Build 0.7.0 includes the Technician Loadout workflow, enhanced Larimer Team View, and a functional demo role/permission system.
 
 ### Technician Loadout
 
@@ -71,7 +71,7 @@ Build 0.6.0 includes the interactive Technician Loadout workflow plus an enhance
 - Technician IV positioned to the Supervisor's right
 - Technician IIIs balanced around the two lead positions
 - Open positions always placed at the far right of the lineup
-- Team mannequins now reflect each technician's currently saved loadout
+- Team mannequins reflect each technician's currently saved loadout
 - Hat, vest, mic, badge, sleeve tools, patch, footwear, and belt gear are represented on the team mannequins
 - Saved duty-belt clock positions are reflected in each team mannequin
 - On-duty and off-duty visual states
@@ -79,6 +79,21 @@ Build 0.6.0 includes the interactive Technician Loadout workflow plus an enhance
 - Technician cards showing role, active loadout, status, and equipped-item count
 - Clicking a technician mannequin or card opens that technician's loadout directly
 
+### Demo Roles & Permissions
+
+The top-bar Demo Role selector now changes actual prototype permissions rather than only changing a label.
+
+- **Technician III** acts as Taylor Reed. Can create and edit personal hypothetical loadouts, but the personal issued loadout is read only and other technicians are read only.
+- **Technician IV** acts as Alex Morgan. Can edit personal hypothetical and issued loadouts, while other technicians remain read only.
+- **Supervisor** acts as Jordan Davis. Can edit issued and hypothetical loadouts for the entire Larimer team.
+- **Admin** has full prototype editing access and is the only demo role allowed to use Reset Demo Data.
+- A visible permission banner shows who the role is acting as, who is currently being viewed, whether the current loadout is editable, and the role's major capabilities.
+- Switching demo roles automatically opens that role's demo user where applicable.
+- Read-only states block inventory swaps, drag-and-drop, belt-position changes, Save, Save As, and New Loadout actions as appropriate.
+- Team View and Inventory remain viewable to all four demo roles.
+
+These permission defaults are for demonstration only. A production version would use configurable user-group permissions backed by real authentication.
+
 ## Status
 
-Interactive Larimer Campus proof-of-concept in active development. Role-based permissions, Excel export, and presentation polish remain planned prototype stages.
+Interactive Larimer Campus proof-of-concept in active development. Excel export and presentation/demo polish remain planned prototype stages.
