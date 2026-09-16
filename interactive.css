@@ -25,8 +25,7 @@
     box-shadow: 0 0 0 4px rgba(13, 45, 108, .16);
 }
 
-.interactive-slot.selected-slot::after {
-    content: "SELECTED";
+.selected-slot-badge {
     position: absolute;
     top: 8px;
     right: 8px;
@@ -37,6 +36,7 @@
     font-size: .56rem;
     font-weight: 900;
     letter-spacing: .08em;
+    text-transform: uppercase;
 }
 
 .interactive-slot.dirty-slot {
@@ -102,6 +102,12 @@
     padding: 4px 0 0;
 }
 
+.belt-position-hint {
+    display: block;
+    margin-top: 2px;
+    color: var(--frcc-blue);
+}
+
 .interactive-inventory {
     transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease, opacity .15s ease;
 }
@@ -150,23 +156,88 @@
 .clock-chip {
     font: inherit;
     cursor: pointer;
+    min-height: 52px;
+    transition: border-color .15s ease, background .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+
+.clock-chip:not(:disabled):hover,
+.clock-chip:not(:disabled):focus-visible {
+    border-color: var(--frcc-sky);
+    outline: none;
+    transform: translateY(-1px);
 }
 
 .clock-chip:disabled {
     cursor: default;
-    opacity: .55;
+    opacity: .48;
+}
+
+.clock-chip.occupied-clock-chip {
+    background: #f6f8fd;
+    color: var(--frcc-blue);
+}
+
+.clock-chip.empty-clock-chip {
+    border-style: dashed;
 }
 
 .clock-chip.selected-clock-chip {
     border-color: var(--frcc-blue);
     background: var(--frcc-pale);
     color: var(--frcc-blue);
-    box-shadow: 0 0 0 2px rgba(13,45,108,.08);
+    box-shadow: 0 0 0 3px rgba(13,45,108,.11);
+}
+
+.clock-chip.dirty-clock-chip {
+    border-color: var(--frcc-gold);
+}
+
+.clock-chip.reserved-clock-chip {
+    background: #f0f1f4;
+    color: #8c93a0;
 }
 
 .button:disabled {
     cursor: not-allowed;
     opacity: .42;
+}
+
+.mannequin:not(.has-shirt) .mannequin-torso,
+.mannequin:not(.has-shirt) .mannequin-arm {
+    background: #d5dae2;
+}
+
+.mannequin.has-shirt .mannequin-torso,
+.mannequin.has-shirt .mannequin-arm {
+    background: #26385a;
+}
+
+.mannequin.has-vest .mannequin-torso {
+    box-shadow: inset 13px 0 0 rgba(18, 27, 45, .26), inset -13px 0 0 rgba(18, 27, 45, .26);
+}
+
+.mannequin.has-vest .mannequin-torso::after {
+    content: "";
+    position: absolute;
+    left: 28px;
+    right: 28px;
+    top: 18px;
+    bottom: 18px;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 9px;
+    pointer-events: none;
+}
+
+.mannequin:not(.has-pants) .mannequin-leg {
+    background: #d5dae2;
+}
+
+.mannequin.has-pants .mannequin-leg {
+    background: #b89c71;
+}
+
+.mannequin:not(.has-footwear) .mannequin-shoe {
+    background: #cfd4dc;
 }
 
 .mannequin.has-cap .mannequin-head::before,
@@ -200,54 +271,316 @@
     border-radius: 8px 10px 5px 5px;
 }
 
-.gear-marker {
+.gear-item {
     position: absolute;
-    z-index: 10;
-    min-width: 19px;
-    height: 19px;
-    padding: 0 4px;
+    z-index: 12;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    cursor: pointer;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,.18));
+}
+
+.gear-item:hover,
+.gear-item:focus-visible,
+.gear-item.selected-gear-item {
+    outline: 3px solid rgba(236,182,22,.45);
+    outline-offset: 3px;
+    border-radius: 5px;
+}
+
+.gear-static.gear-mic {
+    top: 111px;
+    left: 104px;
+    width: 21px;
+    height: 29px;
+}
+
+.mic-body {
+    position: absolute;
+    inset: 7px 2px 1px;
+    border-radius: 4px;
+    background: #20242b;
+    border: 1px solid #4b535e;
+}
+
+.mic-grill {
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    width: 13px;
+    height: 8px;
+    border-radius: 4px 4px 2px 2px;
+    background: repeating-linear-gradient(90deg, #31363e 0 2px, #555c66 2px 3px);
+}
+
+.gear-static.gear-name-badge {
+    top: 145px;
+    left: 102px;
+    width: 28px;
+    height: 13px;
+}
+
+.badge-plate {
     display: grid;
     place-items: center;
-    border-radius: 5px;
-    background: #20242b;
-    color: #fff;
-    border: 1px solid rgba(255,255,255,.38);
-    box-shadow: 0 3px 8px rgba(0,0,0,.18);
+    width: 100%;
+    height: 100%;
+    border-radius: 2px;
+    background: #c8ccd2;
+    color: #27303c;
+    border: 1px solid #7b8491;
     font-size: 7px;
     font-weight: 900;
-    line-height: 1;
-    cursor: pointer;
 }
 
-.gear-marker:hover,
-.gear-marker.selected-gear-marker {
-    outline: 3px solid rgba(236,182,22,.38);
-    background: var(--frcc-blue);
+.gear-static.gear-left-sleeve {
+    top: 132px;
+    left: 17px;
+    width: 18px;
+    height: 47px;
 }
 
-.gear-mic { top: 112px; left: 102px; }
-.gear-name-badge { top: 137px; left: 99px; }
-.gear-radio { top: 234px; left: 34px; }
-.gear-keys { top: 238px; left: 54px; }
-.gear-access-card { top: 236px; left: 72px; }
-.gear-flashlight { top: 235px; right: 36px; }
-.gear-gloves { top: 246px; right: 20px; }
-.gear-handcuffs { top: 252px; right: 51px; }
-.gear-tourniquet { top: 230px; right: 57px; }
-.gear-cpr { top: 250px; left: 23px; }
-.gear-baton {
-    top: 235px;
-    right: 5px;
-    width: 15px;
-    min-width: 15px;
-    height: 66px;
-    border-radius: 7px;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
+.pen {
+    position: absolute;
+    top: 2px;
+    width: 4px;
+    height: 38px;
+    border-radius: 2px;
+    background: #15181d;
+    border-top: 5px solid #687382;
+}
+
+.pen-one { left: 1px; }
+.pen-two { left: 7px; background: #222932; }
+.pen-three { left: 13px; background: #111; border-top-color: #9ca5af; }
+
+.gear-static.gear-patch {
+    top: 111px;
+    right: 14px;
+    width: 25px;
+    height: 31px;
+}
+
+.patch-shield {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #0d2d6c;
+    border: 2px solid #ecb616;
+    clip-path: polygon(50% 0, 95% 18%, 86% 72%, 50% 100%, 14% 72%, 5% 18%);
+}
+
+.gear-belt {
+    width: 24px;
+    height: 35px;
+    transform-origin: center;
+}
+
+.gear-belt.rear-belt-item {
+    opacity: .52;
+    z-index: 6;
+    filter: grayscale(.15) drop-shadow(0 1px 1px rgba(0,0,0,.12));
+}
+
+.belt-pos-12 { top: 217px; left: 81px; }
+.belt-pos-1  { top: 220px; left: 105px; }
+.belt-pos-2  { top: 225px; left: 129px; }
+.belt-pos-3  { top: 235px; left: 151px; }
+.belt-pos-4  { top: 246px; left: 144px; }
+.belt-pos-5  { top: 252px; left: 121px; }
+.belt-pos-6  { top: 254px; left: 81px; }
+.belt-pos-7  { top: 252px; left: 48px; }
+.belt-pos-8  { top: 246px; left: 25px; }
+.belt-pos-9  { top: 235px; left: 10px; }
+.belt-pos-10 { top: 225px; left: 31px; }
+.belt-pos-11 { top: 220px; left: 56px; }
+
+.radio-antenna {
+    position: absolute;
+    left: 4px;
+    top: 0;
+    width: 3px;
+    height: 11px;
+    background: #11151a;
+    border-radius: 3px 3px 0 0;
+}
+
+.radio-body {
+    position: absolute;
+    left: 1px;
+    top: 8px;
+    width: 18px;
+    height: 25px;
+    border-radius: 3px;
+    background: #1c2026;
+    border: 1px solid #4a515b;
+}
+
+.radio-screen {
+    position: absolute;
+    left: 5px;
+    top: 12px;
+    width: 10px;
+    height: 6px;
+    border-radius: 1px;
+    background: #8297a3;
+}
+
+.key-ring {
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    border: 3px solid #b8bdc3;
+    border-radius: 50%;
+    left: 4px;
+    top: 5px;
+}
+
+.key-stem {
+    position: absolute;
+    width: 3px;
+    height: 19px;
+    background: #b8bdc3;
+    top: 14px;
+    transform-origin: top center;
+}
+
+.key-one { left: 8px; transform: rotate(17deg); }
+.key-two { left: 13px; transform: rotate(-10deg); }
+
+.card-body {
+    position: absolute;
+    top: 8px;
+    left: 1px;
+    width: 22px;
+    height: 16px;
+    border-radius: 2px;
+    background: #d9dde4;
+    border: 1px solid #626b77;
+}
+
+.card-body::before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    right: 3px;
+    top: 4px;
+    height: 3px;
+    background: #90bac8;
+}
+
+.card-body i {
+    position: absolute;
+    left: 3px;
+    bottom: 3px;
+    width: 7px;
+    height: 4px;
+    background: #87909b;
+}
+
+.flashlight-body {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    width: 8px;
+    height: 27px;
+    border-radius: 4px;
+    background: #1d2127;
+    border: 1px solid #4b525d;
+}
+
+.flashlight-head {
+    position: absolute;
+    left: 5px;
+    top: 3px;
+    width: 14px;
+    height: 10px;
+    border-radius: 3px 3px 5px 5px;
+    background: #323842;
+}
+
+.pouch-body {
+    position: absolute;
+    left: 1px;
+    top: 8px;
+    width: 22px;
+    height: 23px;
+    display: grid;
+    place-items: center;
+    border-radius: 4px;
+    background: #272c33;
+    color: #dfe3e8;
+    border: 1px solid #555e69;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 900;
+}
+
+.pouch-body.medical {
+    border-color: #7b3f43;
+    box-shadow: inset 0 0 0 1px #3c171a;
+}
+
+.pouch-body.wide {
+    width: 28px;
+    left: -2px;
+    font-size: 6px;
+}
+
+.cuff {
+    position: absolute;
+    top: 8px;
+    width: 12px;
+    height: 12px;
+    border: 3px solid #aeb4bc;
+    border-radius: 50%;
+}
+
+.cuff-one { left: 0; }
+.cuff-two { right: 0; }
+
+.cuff-link {
+    position: absolute;
+    left: 10px;
+    top: 13px;
+    width: 6px;
+    height: 2px;
+    background: #aeb4bc;
+}
+
+.baton-body {
+    position: absolute;
+    left: 9px;
+    top: 0;
+    width: 6px;
+    height: 41px;
+    border-radius: 4px;
+    background: #121519;
+    box-shadow: inset 1px 0 0 #454a52;
+}
+
+.baton-body::after {
+    content: "";
+    position: absolute;
+    left: -4px;
+    top: 6px;
+    width: 11px;
+    height: 4px;
+    border-radius: 3px;
+    background: #1b1f24;
+}
+
+.generic-gear {
+    position: absolute;
+    inset: 8px 2px;
+    border-radius: 4px;
+    background: #292f36;
 }
 
 @media (max-width: 1050px) {
-    .gear-marker {
+    .gear-item {
         transform: scale(.9);
     }
 }
