@@ -16,7 +16,7 @@ A zero-cost proof-of-concept for a videogame-inspired Campus Safety equipment da
 - Demo user roles and permissions
 - Local browser storage only
 - Client-side Excel export
-- A polished presentation flow suitable for sharing as a proof of concept
+- Automatic guided demonstration for first-time viewers
 
 ## Prototype constraints
 
@@ -35,27 +35,11 @@ Only fictional or sanitized demonstration personnel and inventory data should be
 
 ## Branding
 
-This prototype uses approved Front Range Community College branding colors and typography direction.
-
-Official FRCC logo artwork should be added from an approved source file and should not be recreated, distorted, recolored, or modified. Until that asset is supplied, the sidebar uses a temporary text-only FRCC mark.
+This prototype uses the approved Front Range Community College color and typography direction. The proof of concept intentionally retains a simple text-based FRCC identifier rather than requiring an official logo asset.
 
 ## Current interactive build
 
-Build 0.9.0 includes the Technician Loadout workflow, enhanced Larimer Team View, functional demo role/permission system, client-side Excel reporting, and a polished prototype landing experience.
-
-### Presentation Home
-
-Build 0.9.0 adds a dedicated Home view designed for demonstrations and external proof-of-concept review.
-
-- Opens as the default page when the prototype loads
-- Presents the prototype purpose before exposing operational controls
-- Shows filled positions, open positions, available inventory, and saved loadout counts
-- Displays the current demo role, currently viewed technician, inventory summary, and build number
-- Provides direct navigation into Technician Loadout, Team View, Inventory, and Excel Export
-- Includes a **Start Demo** action that switches to Supervisor mode and opens the Larimer Team View
-- Includes a short suggested FireFly presentation sequence
-- Clearly identifies that the prototype uses fictional/sanitized data and local browser storage
-- Uses FRCC blue, white, gold accents, and Roboto/Roboto Condensed as the approved free typography alternative
+Build 0.10.0 includes the Technician Loadout workflow, enhanced Larimer Team View, functional demo role/permission system, client-side Excel reporting, a presentation-ready Home screen, and an automatic guided demo.
 
 ### Technician Loadout
 
@@ -111,7 +95,7 @@ These permission defaults are for demonstration only. A production version would
 
 ### Excel Export
 
-Reports are generated in the user's browser and downloaded as `.xlsx` files.
+The Excel Export view generates `.xlsx` reports in the user's browser.
 
 - **Full Prototype Workbook** includes overview, inventory, available inventory, technician roster, team positions, team equipment, and every saved/issued loadout.
 - **Inventory Report** includes all prototype inventory and a separate available-inventory sheet.
@@ -120,6 +104,26 @@ Reports are generated in the user's browser and downloaded as `.xlsx` files.
 - Export files are generated locally in the browser. Prototype data is not uploaded to a reporting server during the export process.
 - The prototype uses the free SheetJS Community Edition browser library to generate `.xlsx` workbooks.
 
+### Automated Demo
+
+The Home screen's **Start Demo** button now plays the major prototype workflow automatically like a short guided movie.
+
+The sequence:
+
+1. Removes any automated demo loadout left by a previous demo run.
+2. Switches the prototype to Supervisor permissions.
+3. Opens Taylor Reed's Technician III loadout.
+4. Creates one temporary `Automated Demo Loadout` cloned from the issued configuration.
+5. Changes the billed cap to the available Campus Safety beanie.
+6. Changes footwear to the available black laced boots.
+7. Moves the belt radio to 9:00 and the flashlight to 6:00.
+8. Saves the hypothetical loadout.
+9. Opens Team View to show the saved changes on the technician mannequin.
+10. Opens Excel Export and simulates preparation of the Current Technician Loadout workbook without forcing a file download.
+11. Returns to the Home screen.
+
+The automatic demo displays a progress/status player and animated focus indicator. Viewers can stop the demo at any time. If the demo is stopped early, its temporary loadout is removed. After a completed demo, the single automated loadout remains available for inspection; pressing Start Demo again removes that previous automated example before creating a new one, preventing duplicate demo loadouts from accumulating in browser storage.
+
 ## Status
 
-Build 0.9.0 is presentation-ready for continued prototype review. Remaining polish includes replacing the temporary FRCC text mark with the approved official logo asset and any visual/content refinements identified during demonstration testing.
+Interactive Larimer Campus proof-of-concept in presentation and demonstration testing. Production authentication, persistent backend storage, real inventory integrations, additional campuses, vehicles, and expanded reporting remain outside the zero-cost prototype scope.
