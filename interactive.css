@@ -1,0 +1,232 @@
+.interactive-slot {
+    cursor: pointer;
+    position: relative;
+    transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease, background .15s ease;
+}
+
+.interactive-slot:hover,
+.interactive-slot:focus-visible {
+    border-color: var(--frcc-sky);
+    box-shadow: 0 0 0 3px rgba(144, 186, 200, .2);
+    outline: none;
+    transform: translateY(-1px);
+}
+
+.interactive-slot.selected-slot {
+    border-color: var(--frcc-blue);
+    background: #f3f6ff;
+    box-shadow: 0 0 0 3px rgba(13, 45, 108, .12);
+}
+
+.interactive-slot.dirty-slot {
+    border-color: var(--frcc-gold);
+}
+
+.interactive-slot.empty-slot {
+    border-color: #d38b8b;
+    background: #fff7f7;
+}
+
+.interactive-slot.drag-over {
+    border-color: var(--frcc-gold);
+    background: #fff9e7;
+    box-shadow: 0 0 0 4px rgba(236, 182, 22, .18);
+}
+
+.slot-card small {
+    display: block;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: .67rem;
+    font-weight: 700;
+}
+
+.slot-card.dirty-slot small {
+    color: var(--warning);
+}
+
+.status-pill.warning {
+    background: #fff4cf;
+    color: var(--warning);
+}
+
+.status-pill.danger {
+    background: #fde9e9;
+    color: var(--danger);
+}
+
+.inventory-hint {
+    border: 1px dashed var(--frcc-sky);
+    border-radius: 12px;
+    padding: 11px 12px;
+    background: #f6fbfd;
+    display: grid;
+    gap: 4px;
+    color: var(--muted);
+    font-size: .76rem;
+}
+
+.inventory-hint strong {
+    color: var(--frcc-blue);
+    font-size: .83rem;
+}
+
+.inventory-hint button {
+    width: fit-content;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--danger);
+    font-weight: 800;
+    padding: 4px 0 0;
+}
+
+.interactive-inventory {
+    transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease, opacity .15s ease;
+}
+
+.interactive-inventory[role="button"] {
+    cursor: grab;
+}
+
+.interactive-inventory[role="button"]:active {
+    cursor: grabbing;
+}
+
+.interactive-inventory[role="button"]:hover,
+.interactive-inventory[role="button"]:focus-visible {
+    border-color: var(--frcc-sky);
+    box-shadow: 0 0 0 3px rgba(144, 186, 200, .18);
+    outline: none;
+    transform: translateY(-1px);
+}
+
+.interactive-inventory.blocked-item {
+    opacity: .58;
+    background: #f4f5f7;
+}
+
+.interactive-inventory.selected-item {
+    border-color: var(--frcc-blue);
+    background: #f4f7ff;
+}
+
+.interactive-inventory.dragging-item {
+    opacity: .55;
+}
+
+.equipped-badge {
+    display: inline-flex;
+    margin-top: 8px;
+    padding: 4px 7px;
+    border-radius: 999px;
+    background: var(--frcc-pale);
+    color: var(--frcc-blue);
+    font-size: .67rem;
+    font-weight: 800;
+}
+
+.clock-chip {
+    font: inherit;
+    cursor: pointer;
+}
+
+.clock-chip:disabled {
+    cursor: default;
+    opacity: .55;
+}
+
+.clock-chip.selected-clock-chip {
+    border-color: var(--frcc-blue);
+    background: var(--frcc-pale);
+    color: var(--frcc-blue);
+    box-shadow: 0 0 0 2px rgba(13,45,108,.08);
+}
+
+.button:disabled {
+    cursor: not-allowed;
+    opacity: .42;
+}
+
+.mannequin.has-cap .mannequin-head::before,
+.mannequin.has-beanie .mannequin-head::before {
+    content: "";
+    position: absolute;
+    left: -4px;
+    right: -4px;
+    z-index: 4;
+}
+
+.mannequin.has-cap .mannequin-head::before {
+    top: -8px;
+    height: 20px;
+    border-radius: 18px 18px 6px 6px;
+    background: #213352;
+    box-shadow: 18px 13px 0 -7px #213352;
+}
+
+.mannequin.has-beanie .mannequin-head::before {
+    top: -12px;
+    height: 30px;
+    border-radius: 28px 28px 8px 8px;
+    background: #213352;
+    border-bottom: 5px solid #182640;
+}
+
+.mannequin.has-boots .mannequin-shoe {
+    height: 34px;
+    top: 389px;
+    border-radius: 8px 10px 5px 5px;
+}
+
+.gear-marker {
+    position: absolute;
+    z-index: 10;
+    min-width: 19px;
+    height: 19px;
+    padding: 0 4px;
+    display: grid;
+    place-items: center;
+    border-radius: 5px;
+    background: #20242b;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.38);
+    box-shadow: 0 3px 8px rgba(0,0,0,.18);
+    font-size: 7px;
+    font-weight: 900;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.gear-marker:hover,
+.gear-marker.selected-gear-marker {
+    outline: 3px solid rgba(236,182,22,.38);
+    background: var(--frcc-blue);
+}
+
+.gear-mic { top: 112px; left: 102px; }
+.gear-name-badge { top: 137px; left: 99px; }
+.gear-radio { top: 234px; left: 34px; }
+.gear-keys { top: 238px; left: 54px; }
+.gear-access-card { top: 236px; left: 72px; }
+.gear-flashlight { top: 235px; right: 36px; }
+.gear-gloves { top: 246px; right: 20px; }
+.gear-handcuffs { top: 252px; right: 51px; }
+.gear-tourniquet { top: 230px; right: 57px; }
+.gear-cpr { top: 250px; left: 23px; }
+.gear-baton {
+    top: 235px;
+    right: 5px;
+    width: 15px;
+    min-width: 15px;
+    height: 66px;
+    border-radius: 7px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+}
+
+@media (max-width: 1050px) {
+    .gear-marker {
+        transform: scale(.9);
+    }
+}
