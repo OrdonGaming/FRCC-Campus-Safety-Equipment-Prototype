@@ -40,14 +40,16 @@ Official FRCC logo artwork should be added from approved source files and should
 
 ## Current interactive build
 
-Build 0.5.0 of the Technician Loadout screen supports:
+Build 0.6.0 includes the interactive Technician Loadout workflow plus an enhanced Larimer Team View.
+
+### Technician Loadout
 
 - Clickable equipment slots
 - Inventory filtering by selected slot
 - Click-to-equip equipment swapping
 - Basic drag-and-drop from inventory to compatible equipment slots
 - Immediate mannequin feedback for selected gear
-- More recognizable visual representations for radio, mic, name badge, sleeve tools, patch, keys, access card, flashlight, pouches, handcuffs, tourniquet, CPR kit, and baton
+- Visual representations for radio, mic, name badge, sleeve tools, patch, keys, access card, flashlight, pouches, handcuffs, tourniquet, CPR kit, and baton
 - Hat and footwear visual changes, including billed cap, beanie, shoes, and boots
 - Visible uniform state for shirt, under-shirt protective vest, pants, and footwear
 - Editable duty-belt clock positions from 1:00 through 12:00
@@ -62,6 +64,21 @@ Build 0.5.0 of the Technician Loadout screen supports:
 - Browser `localStorage` persistence
 - Reset Demo Data
 
+### Team View
+
+- Variable team sizes with the lineup automatically centered
+- Supervisor presented at front center
+- Technician IV positioned to the Supervisor's right
+- Technician IIIs balanced around the two lead positions
+- Open positions always placed at the far right of the lineup
+- Team mannequins now reflect each technician's currently saved loadout
+- Hat, vest, mic, badge, sleeve tools, patch, footwear, and belt gear are represented on the team mannequins
+- Saved duty-belt clock positions are reflected in each team mannequin
+- On-duty and off-duty visual states
+- Staffing summary showing filled, on-duty, off-duty, and open positions
+- Technician cards showing role, active loadout, status, and equipped-item count
+- Clicking a technician mannequin or card opens that technician's loadout directly
+
 ## Status
 
-Interactive Larimer technician loadout prototype in active development. Team-view loadout visualization is the next planned development stage.
+Interactive Larimer Campus proof-of-concept in active development. Role-based permissions, Excel export, and presentation polish remain planned prototype stages.
