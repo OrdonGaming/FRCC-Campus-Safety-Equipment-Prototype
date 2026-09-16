@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="FRCC Campus Safety Equipment Dashboard Larimer Campus proof-of-concept">
     <title>FRCC Campus Safety Equipment Dashboard</title>
-    <link rel="stylesheet" href="styles.css?v=0.7.0">
-    <link rel="stylesheet" href="interactive.css?v=0.7.0">
-    <link rel="stylesheet" href="team.css?v=0.7.0">
-    <link rel="stylesheet" href="permissions.css?v=0.7.0">
+    <link rel="stylesheet" href="styles.css?v=0.8.0">
+    <link rel="stylesheet" href="interactive.css?v=0.8.0">
+    <link rel="stylesheet" href="team.css?v=0.8.0">
+    <link rel="stylesheet" href="permissions.css?v=0.8.0">
+    <link rel="stylesheet" href="export.css?v=0.8.0">
 </head>
 <body>
     <div class="app-shell">
@@ -27,6 +28,7 @@
                 <button class="nav-button active" data-view="loadout-view">Technician Loadout</button>
                 <button class="nav-button" data-view="team-view">Team View</button>
                 <button class="nav-button" data-view="inventory-view">Inventory</button>
+                <button class="nav-button" data-view="export-view">Excel Export</button>
             </nav>
 
             <div class="sidebar-spacer"></div>
@@ -177,20 +179,93 @@
                         <div id="inventory-table"></div>
                     </section>
                 </section>
+
+                <section id="export-view" class="view" aria-labelledby="export-title">
+                    <div class="section-heading">
+                        <div>
+                            <p class="eyebrow">Prototype reporting</p>
+                            <h2 id="export-title">Excel Export</h2>
+                            <p class="section-description">Generate Excel workbooks from the current Larimer Campus prototype data. The export is created locally in your browser.</p>
+                        </div>
+                    </div>
+
+                    <section class="panel export-intro">
+                        <div class="export-intro-copy">
+                            <h3>Browser-based Excel reports</h3>
+                            <p>No prototype data is uploaded to a server during export. Downloaded workbooks contain only the fictional or sanitized demonstration data currently stored in this browser.</p>
+                        </div>
+                        <span id="export-library-status" class="export-library-status">Checking Excel export...</span>
+                    </section>
+
+                    <div class="export-grid">
+                        <article class="panel export-card featured">
+                            <h3>Full Prototype Workbook</h3>
+                            <p>Create one workbook containing the major reporting views from the prototype.</p>
+                            <ul>
+                                <li>Inventory and available inventory</li>
+                                <li>Technician roster</li>
+                                <li>Team positions and team equipment</li>
+                                <li>Every saved and issued loadout</li>
+                            </ul>
+                            <button class="button primary" id="export-full-workbook">Download Full Workbook</button>
+                        </article>
+
+                        <article class="panel export-card">
+                            <h3>Inventory Report</h3>
+                            <p>Export the Larimer prototype inventory, including availability, condition, equipment slot, and current assignment.</p>
+                            <ul>
+                                <li>All inventory</li>
+                                <li>Available inventory only</li>
+                                <li>Asset IDs and assignment status</li>
+                            </ul>
+                            <button class="button secondary" id="export-inventory-workbook">Download Inventory</button>
+                        </article>
+
+                        <article class="panel export-card">
+                            <h3>Current Technician Loadout</h3>
+                            <p>Export the technician and loadout currently shown on the Technician Loadout screen.</p>
+                            <ul>
+                                <li>Equipment by slot</li>
+                                <li>Asset IDs and condition</li>
+                                <li>Duty-belt clock positions</li>
+                                <li>Unsaved draft state is identified when applicable</li>
+                            </ul>
+                            <button class="button secondary" id="export-current-loadout-workbook">Download Current Loadout</button>
+                        </article>
+
+                        <article class="panel export-card">
+                            <h3>Team Loadout Report</h3>
+                            <p>Export the current Larimer team structure and each filled position's active saved loadout.</p>
+                            <ul>
+                                <li>Lineup order and open positions</li>
+                                <li>Role and duty status</li>
+                                <li>Team equipment detail</li>
+                                <li>Saved duty-belt positions</li>
+                            </ul>
+                            <button class="button secondary" id="export-team-workbook">Download Team Report</button>
+                        </article>
+                    </div>
+
+                    <div class="export-note">
+                        <strong>Prototype note:</strong> Excel exports are demonstration reports, not official FRCC inventory records. A production version could add configurable export permissions, audit history, inspection reports, expiration reports, and campus/vehicle-specific reporting.
+                    </div>
+                </section>
             </main>
 
             <footer class="footer">
                 <span>FRCC Campus Safety Equipment Dashboard</span>
-                <span>Proof of Concept · Local demo data only · Build 0.7.0</span>
+                <span>Proof of Concept · Local demo data only · Build 0.8.0</span>
             </footer>
         </div>
     </div>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-    <script src="data.js?v=0.7.0"></script>
-    <script src="app.js?v=0.7.0"></script>
-    <script src="team.js?v=0.7.0"></script>
-    <script src="permissions.js?v=0.7.0"></script>
+    <script src="data.js?v=0.8.0"></script>
+    <script src="app.js?v=0.8.0"></script>
+    <script src="team.js?v=0.8.0"></script>
+    <script src="permissions.js?v=0.8.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="export.js?v=0.8.0"></script>
 </body>
 </html>
