@@ -1,0 +1,740 @@
+/* Build 0.11.0 — stronger concept-art-inspired mannequin redesign.
+   This file intentionally overrides the existing mannequin CSS without
+   changing any loadout, inventory, permission, demo, or export logic. */
+
+:root {
+    --mannequin-skin: #d9dde4;
+    --mannequin-skin-shadow: #c3c9d2;
+    --uniform-blue: #233a63;
+    --uniform-blue-dark: #182a48;
+    --uniform-blue-light: #314f7d;
+    --uniform-seam: rgba(255,255,255,.15);
+    --uniform-khaki: #b79b71;
+    --uniform-khaki-dark: #927a56;
+    --gear-black: #171c24;
+    --gear-edge: #454f5c;
+}
+
+/* --------------------------------------------------------------------------
+   INDIVIDUAL LOADOUT MANNEQUIN
+   -------------------------------------------------------------------------- */
+
+.mannequin-panel {
+    background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
+}
+
+.mannequin-stage {
+    min-height: 520px;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+        radial-gradient(ellipse at 50% 78%, rgba(13,45,108,.09), transparent 31%),
+        radial-gradient(circle at 50% 34%, rgba(144,186,200,.24), transparent 32%),
+        linear-gradient(180deg, #fbfdff 0%, #edf3fb 72%, #e4ebf6 100%);
+}
+
+.mannequin-stage::before {
+    width: 82%;
+    bottom: 10.5%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(13,45,108,.24), transparent);
+    z-index: 0;
+}
+
+.mannequin-stage::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 7.5%;
+    width: 245px;
+    height: 44px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    border: 1px solid rgba(13,45,108,.15);
+    background: radial-gradient(ellipse at center, rgba(13,45,108,.10), rgba(13,45,108,.025) 58%, transparent 72%);
+    box-shadow: 0 18px 34px rgba(13,45,108,.08);
+    z-index: 0;
+}
+
+.mannequin {
+    width: 185px;
+    height: 430px;
+    transform: scale(.94);
+    transform-origin: center bottom;
+    z-index: 2;
+    filter: drop-shadow(0 16px 16px rgba(22,39,67,.13));
+}
+
+.mannequin-head {
+    width: 58px;
+    height: 70px;
+    left: 64px;
+    top: 5px;
+    border-radius: 48% 48% 45% 45% / 43% 43% 57% 57%;
+    background:
+        radial-gradient(circle at 38% 28%, rgba(255,255,255,.62), transparent 25%),
+        linear-gradient(135deg, #e8ebf0 0%, var(--mannequin-skin) 55%, var(--mannequin-skin-shadow) 100%);
+    border: 1px solid #c1c7d0;
+    box-shadow:
+        inset -7px -8px 12px rgba(107,118,134,.12),
+        inset 6px 5px 10px rgba(255,255,255,.38),
+        0 3px 7px rgba(22,39,67,.08);
+    overflow: visible;
+}
+
+.mannequin-head::after {
+    content: "";
+    position: absolute;
+    left: 13px;
+    right: 13px;
+    bottom: 10px;
+    height: 18px;
+    border-radius: 50%;
+    border-bottom: 1px solid rgba(91,102,116,.18);
+    opacity: .7;
+    pointer-events: none;
+}
+
+.mannequin-neck {
+    width: 28px;
+    height: 24px;
+    left: 79px;
+    top: 68px;
+    border-radius: 7px 7px 4px 4px;
+    background: linear-gradient(90deg, #c8ced7 0%, #e2e6eb 46%, #c5cbd4 100%);
+    box-shadow: inset 0 -5px 6px rgba(98,109,123,.12);
+}
+
+.mannequin-torso {
+    width: 126px;
+    height: 164px;
+    left: 30px;
+    top: 86px;
+    clip-path: polygon(18% 0, 82% 0, 99% 18%, 91% 100%, 9% 100%, 1% 18%);
+    background:
+        linear-gradient(90deg, rgba(0,0,0,.13), transparent 17%, transparent 82%, rgba(0,0,0,.13)),
+        linear-gradient(180deg, var(--uniform-blue-light) 0%, var(--uniform-blue) 34%, var(--uniform-blue-dark) 100%);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.20),
+        inset 0 -20px 24px rgba(11,23,42,.16);
+}
+
+.mannequin.has-shirt .mannequin-torso,
+.mannequin.has-shirt .mannequin-arm {
+    background-color: var(--uniform-blue);
+}
+
+.mannequin-torso::before {
+    content: "";
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    top: 29px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--uniform-seam), transparent);
+    box-shadow: 0 44px 0 rgba(255,255,255,.06);
+    pointer-events: none;
+}
+
+.mannequin.has-vest .mannequin-torso {
+    box-shadow:
+        inset 16px 0 14px rgba(12,21,36,.24),
+        inset -16px 0 14px rgba(12,21,36,.24),
+        inset 0 -20px 24px rgba(11,23,42,.18);
+}
+
+.mannequin.has-vest .mannequin-torso::after {
+    left: 25px;
+    right: 25px;
+    top: 19px;
+    bottom: 18px;
+    border: 1px solid rgba(229,237,247,.18);
+    border-radius: 11px;
+    background: linear-gradient(180deg, rgba(12,21,36,.07), rgba(12,21,36,.14));
+    box-shadow: inset 0 0 0 1px rgba(11,20,34,.13);
+}
+
+.polo-collar {
+    left: 42px;
+    top: 0;
+    width: 42px;
+    height: 29px;
+    border: 0;
+    background:
+        linear-gradient(136deg, var(--uniform-blue-dark) 0 49%, transparent 50%) left top / 50% 100% no-repeat,
+        linear-gradient(224deg, var(--uniform-blue-dark) 0 49%, transparent 50%) right top / 50% 100% no-repeat;
+}
+
+.polo-collar::after {
+    content: "";
+    position: absolute;
+    left: 18px;
+    top: 5px;
+    width: 6px;
+    height: 32px;
+    border-radius: 3px;
+    background: rgba(13,26,46,.35);
+    box-shadow: 0 7px 0 -2px rgba(255,255,255,.22), 0 14px 0 -2px rgba(255,255,255,.18);
+}
+
+.uniform-label {
+    top: 47px;
+    left: 50px;
+    right: 10px;
+    text-align: left;
+    font-size: 7px;
+    letter-spacing: .08em;
+    color: rgba(255,255,255,.82);
+    text-shadow: 0 1px 1px rgba(0,0,0,.18);
+}
+
+.mannequin-arm {
+    width: 28px;
+    height: 164px;
+    top: 101px;
+    border-radius: 15px 15px 13px 13px;
+    background:
+        linear-gradient(90deg, rgba(0,0,0,.16), transparent 45%, rgba(255,255,255,.06)),
+        linear-gradient(180deg, var(--uniform-blue-light), var(--uniform-blue) 38%, var(--uniform-blue-dark));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.16);
+}
+
+.mannequin-arm::before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    right: 3px;
+    top: 46px;
+    height: 1px;
+    background: rgba(255,255,255,.15);
+    box-shadow: 0 2px 0 rgba(0,0,0,.08);
+}
+
+.left-arm {
+    left: 10px;
+    transform: rotate(4deg);
+}
+
+.right-arm {
+    right: 10px;
+    transform: rotate(-4deg);
+}
+
+.duty-belt {
+    width: 132px;
+    height: 17px;
+    left: 27px;
+    top: 236px;
+    border-radius: 5px;
+    background: linear-gradient(180deg, #363d47 0%, #191e25 38%, #11161d 100%);
+    border: 1px solid #11151b;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.16),
+        0 2px 5px rgba(0,0,0,.18);
+}
+
+.duty-belt::before {
+    content: "";
+    position: absolute;
+    left: 53px;
+    top: 2px;
+    width: 25px;
+    height: 11px;
+    border-radius: 3px;
+    background: linear-gradient(180deg, #4e5865, #20262f);
+    border: 1px solid #0e1218;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+}
+
+.duty-belt::after {
+    content: "";
+    position: absolute;
+    inset: 2px 6px;
+    border-radius: 3px;
+    background: repeating-linear-gradient(90deg, transparent 0 20px, rgba(255,255,255,.12) 20px 22px, transparent 22px 28px);
+    pointer-events: none;
+}
+
+.mannequin-leg {
+    top: 249px;
+    width: 45px;
+    height: 158px;
+    border-radius: 6px 6px 13px 13px;
+    background:
+        linear-gradient(90deg, rgba(0,0,0,.10), transparent 38%, rgba(255,255,255,.10) 55%, rgba(0,0,0,.08)),
+        linear-gradient(180deg, #c4aa80 0%, var(--uniform-khaki) 48%, #a88b63 100%);
+    box-shadow: inset 0 -7px 9px rgba(94,72,42,.10);
+}
+
+.mannequin-leg::before {
+    content: "";
+    position: absolute;
+    top: 51px;
+    width: 28px;
+    height: 31px;
+    border-radius: 4px;
+    border: 1px solid rgba(88,67,39,.26);
+    background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(108,82,47,.07));
+    box-shadow: inset 0 5px 0 rgba(116,88,51,.07);
+}
+
+.mannequin-leg::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    bottom: 9px;
+    width: 1px;
+    background: rgba(102,79,49,.15);
+}
+
+.left-leg {
+    left: 44px;
+    clip-path: polygon(0 0, 100% 0, 92% 100%, 5% 100%);
+}
+
+.right-leg {
+    right: 44px;
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 8% 100%);
+}
+
+.left-leg::before { right: 5px; }
+.right-leg::before { left: 5px; }
+.left-leg::after { right: 7px; }
+.right-leg::after { left: 7px; }
+
+.mannequin-shoe {
+    width: 55px;
+    height: 23px;
+    top: 399px;
+    border-radius: 10px 14px 5px 5px;
+    background:
+        repeating-linear-gradient(90deg, transparent 0 7px, rgba(255,255,255,.10) 7px 8px, transparent 8px 11px),
+        linear-gradient(180deg, #303641 0%, #14181e 58%, #090c10 100%);
+    border: 1px solid #0a0d11;
+    box-shadow: inset 0 2px 0 rgba(255,255,255,.08), 0 4px 5px rgba(0,0,0,.12);
+}
+
+.mannequin-shoe::after {
+    content: "";
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    bottom: 3px;
+    height: 2px;
+    background: rgba(255,255,255,.11);
+    border-radius: 999px;
+}
+
+.mannequin.has-boots .mannequin-shoe {
+    height: 35px;
+    top: 387px;
+    border-radius: 7px 9px 5px 5px;
+    background:
+        repeating-linear-gradient(90deg, transparent 0 7px, rgba(255,255,255,.10) 7px 8px, transparent 8px 11px),
+        linear-gradient(180deg, #343b46 0%, #171b21 58%, #090c10 100%);
+}
+
+.mannequin.has-cap .mannequin-head::before {
+    left: -5px;
+    right: -5px;
+    top: -9px;
+    height: 20px;
+    border-radius: 22px 22px 6px 6px;
+    background: linear-gradient(180deg, #314e79, #1c2e4d);
+    border: 1px solid #14243e;
+    box-shadow: 20px 13px 0 -7px #1b2b47, inset 0 2px 0 rgba(255,255,255,.13);
+}
+
+.mannequin.has-beanie .mannequin-head::before {
+    left: -4px;
+    right: -4px;
+    top: -13px;
+    height: 30px;
+    border-radius: 28px 28px 8px 8px;
+    background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 2px, transparent 2px 5px),
+        linear-gradient(180deg, #324d75, #1a2c49);
+    border: 1px solid #14243e;
+    border-bottom: 5px solid #162640;
+    box-shadow: inset 0 2px 0 rgba(255,255,255,.10);
+}
+
+/* Individual gear: slightly larger, cleaner, and more dimensional. */
+.gear-item {
+    filter: drop-shadow(0 3px 3px rgba(0,0,0,.24));
+    transition: transform .15s ease, filter .15s ease;
+}
+
+.gear-item:hover,
+.gear-item:focus-visible,
+.gear-item.selected-gear-item {
+    transform: scale(1.08);
+    filter: drop-shadow(0 4px 5px rgba(0,0,0,.28));
+}
+
+.gear-static.gear-mic {
+    top: 111px;
+    left: 101px;
+}
+
+.gear-static.gear-name-badge {
+    top: 144px;
+    left: 103px;
+    width: 29px;
+}
+
+.gear-static.gear-left-sleeve {
+    top: 134px;
+    left: 16px;
+}
+
+.gear-static.gear-patch {
+    top: 116px;
+    right: 13px;
+}
+
+.patch-shield {
+    background: linear-gradient(180deg, #184087, #0d2d6c 68%, #092354);
+    border-color: #e8b21b;
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,.18));
+}
+
+.badge-plate {
+    background: linear-gradient(180deg, #f0f2f5, #abb3bf);
+    border-color: #707a87;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
+}
+
+.mic-body,
+.radio-body,
+.flashlight-body,
+.pouch-body,
+.baton-body {
+    background-image: linear-gradient(135deg, rgba(255,255,255,.10), transparent 34%, rgba(0,0,0,.16));
+}
+
+/* --------------------------------------------------------------------------
+   TEAM VIEW MANNEQUINS
+   -------------------------------------------------------------------------- */
+
+.team-stage {
+    position: relative;
+    min-height: 535px;
+    background:
+        radial-gradient(ellipse at 50% 82%, rgba(13,45,108,.12), transparent 34%),
+        radial-gradient(circle at 50% 30%, rgba(144,186,200,.20), transparent 30%),
+        linear-gradient(180deg, #fbfdff 0%, #eef3fb 65%, #e6edf7 100%);
+}
+
+.team-stage::after {
+    content: "";
+    position: absolute;
+    left: 9%;
+    right: 9%;
+    bottom: 20px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(13,45,108,.12);
+    background: radial-gradient(ellipse at center, rgba(13,45,108,.08), transparent 70%);
+    pointer-events: none;
+}
+
+.team-lineup {
+    position: relative;
+    z-index: 2;
+}
+
+.team-member {
+    width: clamp(100px, 11vw, 154px);
+}
+
+.team-mannequin {
+    width: 112px;
+    height: 316px;
+    filter: drop-shadow(0 10px 9px rgba(22,39,67,.12));
+}
+
+.team-mannequin .head {
+    width: 40px;
+    height: 49px;
+    left: 36px;
+    top: 3px;
+    border-radius: 48% 48% 45% 45% / 43% 43% 57% 57%;
+    background:
+        radial-gradient(circle at 38% 28%, rgba(255,255,255,.58), transparent 25%),
+        linear-gradient(135deg, #e7eaf0, #d3d8df 58%, #bcc3ce);
+    border: 1px solid #bdc4ce;
+    box-shadow: inset -4px -5px 7px rgba(90,102,119,.10);
+}
+
+.team-mannequin .head::after {
+    content: "";
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 7px;
+    height: 12px;
+    border-radius: 50%;
+    border-bottom: 1px solid rgba(91,102,116,.16);
+}
+
+.team-mannequin .torso {
+    width: 78px;
+    height: 116px;
+    left: 17px;
+    top: 48px;
+    clip-path: polygon(18% 0, 82% 0, 99% 18%, 90% 100%, 10% 100%, 1% 18%);
+    background:
+        linear-gradient(90deg, rgba(0,0,0,.12), transparent 20%, transparent 80%, rgba(0,0,0,.12)),
+        linear-gradient(180deg, var(--uniform-blue-light), var(--uniform-blue) 38%, var(--uniform-blue-dark));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.16);
+}
+
+.team-mannequin .torso::after {
+    content: "";
+    position: absolute;
+    left: 13px;
+    right: 13px;
+    top: 25px;
+    height: 1px;
+    background: rgba(255,255,255,.12);
+}
+
+.team-mannequin .arm {
+    top: 59px;
+    width: 17px;
+    height: 114px;
+    border-radius: 11px;
+    background:
+        linear-gradient(90deg, rgba(0,0,0,.15), transparent 50%, rgba(255,255,255,.05)),
+        linear-gradient(180deg, var(--uniform-blue-light), var(--uniform-blue) 40%, var(--uniform-blue-dark));
+}
+
+.team-mannequin .arm.left {
+    left: 8px;
+    transform: rotate(4deg);
+}
+
+.team-mannequin .arm.right {
+    right: 8px;
+    transform: rotate(-4deg);
+}
+
+.team-mannequin .arm::after {
+    content: "";
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    top: 34px;
+    height: 1px;
+    background: rgba(255,255,255,.13);
+}
+
+.team-mannequin .leg {
+    top: 160px;
+    width: 27px;
+    height: 138px;
+    border-radius: 5px 5px 9px 9px;
+    background:
+        linear-gradient(90deg, rgba(0,0,0,.09), transparent 45%, rgba(255,255,255,.09)),
+        linear-gradient(180deg, #c4aa80, var(--uniform-khaki) 50%, #a98d64);
+}
+
+.team-mannequin .leg.left { left: 25px; }
+.team-mannequin .leg.right { right: 25px; }
+
+.team-mannequin .leg::before {
+    content: "";
+    position: absolute;
+    top: 42px;
+    width: 18px;
+    height: 23px;
+    border: 1px solid rgba(88,67,39,.22);
+    border-radius: 3px;
+    background: rgba(113,86,50,.05);
+}
+
+.team-mannequin .leg.left::before { right: 2px; }
+.team-mannequin .leg.right::before { left: 2px; }
+
+.team-loadout-mannequin .team-duty-belt {
+    left: 18px;
+    top: 155px;
+    width: 76px;
+    height: 9px;
+    background: linear-gradient(180deg, #363d47, #171b21);
+    border: 1px solid #0d1116;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 2px 3px rgba(0,0,0,.14);
+}
+
+.team-loadout-mannequin .team-duty-belt::before {
+    content: "";
+    position: absolute;
+    left: 30px;
+    top: 1px;
+    width: 16px;
+    height: 5px;
+    border-radius: 2px;
+    background: #4b5664;
+    border: 1px solid #111820;
+}
+
+.team-loadout-mannequin .team-vest {
+    left: 16px;
+    right: 16px;
+    top: 15px;
+    bottom: 18px;
+    border-radius: 8px;
+    border: 1px solid rgba(225,235,248,.18);
+    background: linear-gradient(180deg, rgba(10,18,31,.12), rgba(10,18,31,.20));
+    box-shadow: inset 6px 0 7px rgba(0,0,0,.10), inset -6px 0 7px rgba(0,0,0,.10);
+}
+
+.team-loadout-mannequin .team-patch {
+    width: 12px;
+    height: 15px;
+    right: -5px;
+    top: 29px;
+    border-radius: 3px;
+    clip-path: polygon(50% 0, 95% 18%, 86% 72%, 50% 100%, 14% 72%, 5% 18%);
+    background: #0d2d6c;
+    border: 0;
+    box-shadow: 0 0 0 1px #ecb616 inset, 0 1px 2px rgba(0,0,0,.22);
+}
+
+.team-loadout-mannequin .team-mic {
+    width: 8px;
+    height: 14px;
+    left: 20px;
+    top: 22px;
+    border-radius: 3px;
+    background: linear-gradient(180deg, #3a424d, #11161d);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+.team-loadout-mannequin .team-badge {
+    width: 17px;
+    height: 7px;
+    right: 15px;
+    top: 29px;
+    background: linear-gradient(180deg, #f0f2f5, #abb3bf);
+    border: 1px solid #727d8b;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.55);
+}
+
+.team-loadout-mannequin .team-shoe {
+    width: 32px;
+    height: 14px;
+    top: 291px;
+    background: linear-gradient(180deg, #303641, #101419 65%, #070a0d);
+    border: 1px solid #090c10;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.team-loadout-mannequin.team-has-boots .team-shoe {
+    height: 23px;
+    top: 282px;
+    background: linear-gradient(180deg, #343b46, #14191f 62%, #070a0d);
+}
+
+.team-belt-gear {
+    background: linear-gradient(135deg, #39424f, #171d25 58%, #0e1319);
+    border-color: rgba(255,255,255,.26);
+    box-shadow: 0 2px 4px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.team-loadout-mannequin.team-has-cap .head::before {
+    left: -4px;
+    right: -4px;
+    top: -7px;
+    height: 13px;
+    border-radius: 12px 12px 3px 3px;
+    background: linear-gradient(180deg, #314e79, #1b2d4b);
+    border: 1px solid #14243e;
+    box-shadow: 13px 8px 0 -5px #192a46, inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+.team-loadout-mannequin.team-has-beanie .head::before {
+    top: -10px;
+    height: 20px;
+    border-radius: 17px 17px 5px 5px;
+    background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, transparent 1px 4px),
+        linear-gradient(180deg, #324d75, #1a2c49);
+    border: 1px solid #14243e;
+    border-bottom: 3px solid #162640;
+}
+
+/* Open positions now look intentionally vacant rather than merely dimmed. */
+.team-member.open-position {
+    opacity: 1;
+    filter: none;
+}
+
+.open-team-mannequin {
+    opacity: .9;
+    filter: none;
+}
+
+.open-position .open-team-mannequin .head,
+.open-position .open-team-mannequin .torso,
+.open-position .open-team-mannequin .arm,
+.open-position .open-team-mannequin .leg {
+    background: rgba(229,235,244,.42);
+    border: 1px dashed rgba(13,45,108,.34);
+    box-shadow: none;
+}
+
+.open-position .open-team-mannequin .torso {
+    clip-path: polygon(18% 0, 82% 0, 99% 18%, 90% 100%, 10% 100%, 1% 18%);
+}
+
+.open-position .open-team-mannequin .head::after,
+.open-position .open-team-mannequin .torso::after,
+.open-position .open-team-mannequin .arm::after,
+.open-position .open-team-mannequin .leg::before {
+    display: none;
+}
+
+.open-position .member-name {
+    color: #6f7b90;
+}
+
+.open-position .member-role,
+.open-position .member-loadout {
+    color: #8a94a5;
+}
+
+/* hierarchy emphasis without turning people into different body types */
+.team-member.supervisor .team-loadout-mannequin {
+    filter: drop-shadow(0 12px 10px rgba(13,45,108,.18));
+}
+
+.team-member.supervisor::before {
+    content: "";
+    position: absolute;
+    left: 18%;
+    right: 18%;
+    top: 1px;
+    height: 8px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent, rgba(236,182,22,.58), transparent);
+    filter: blur(5px);
+    pointer-events: none;
+}
+
+@media (max-width: 1180px) {
+    .mannequin {
+        transform: scale(.89);
+    }
+}
+
+@media (max-width: 760px) {
+    .mannequin-stage {
+        min-height: 490px;
+    }
+
+    .team-stage {
+        min-height: 510px;
+    }
+}
