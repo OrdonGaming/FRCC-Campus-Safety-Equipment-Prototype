@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="FRCC Campus Safety Equipment Dashboard Larimer Campus proof-of-concept">
     <title>FRCC Campus Safety Equipment Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="interactive.css">
+    <link rel="stylesheet" href="styles.css?v=0.4.1">
+    <link rel="stylesheet" href="interactive.css?v=0.4.1">
 </head>
 <body>
     <div class="app-shell">
@@ -84,6 +84,7 @@
                                 <div>
                                     <p class="eyebrow">Equipped</p>
                                     <h3>Equipment Slots</h3>
+                                    <p class="panel-help">Click a slot to select it and filter compatible inventory.</p>
                                 </div>
                                 <span class="status-pill success">Complete</span>
                             </div>
@@ -173,14 +174,14 @@
 
             <footer class="footer">
                 <span>FRCC Campus Safety Equipment Dashboard</span>
-                <span>Proof of Concept · Local demo data only</span>
+                <span>Proof of Concept · Local demo data only · Build 0.4.1</span>
             </footer>
         </div>
     </div>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-    <script src="data.js"></script>
-    <script src="app.js"></script>
+    <script src="data.js?v=0.4.1"></script>
+    <script src="app.js?v=0.4.1"></script>
 </body>
 </html>
