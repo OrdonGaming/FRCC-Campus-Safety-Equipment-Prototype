@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="FRCC Campus Safety Equipment Dashboard Larimer Campus proof-of-concept">
     <title>FRCC Campus Safety Equipment Dashboard</title>
-    <link rel="stylesheet" href="styles.css?v=0.8.0">
-    <link rel="stylesheet" href="interactive.css?v=0.8.0">
-    <link rel="stylesheet" href="team.css?v=0.8.0">
-    <link rel="stylesheet" href="permissions.css?v=0.8.0">
-    <link rel="stylesheet" href="export.css?v=0.8.0">
+    <link rel="stylesheet" href="styles.css?v=0.9.0">
+    <link rel="stylesheet" href="interactive.css?v=0.9.0">
+    <link rel="stylesheet" href="team.css?v=0.9.0">
+    <link rel="stylesheet" href="permissions.css?v=0.9.0">
+    <link rel="stylesheet" href="export.css?v=0.9.0">
+    <link rel="stylesheet" href="polish.css?v=0.9.0">
 </head>
-<body>
+<body class="home-active">
     <div class="app-shell">
         <aside class="sidebar" aria-label="Primary navigation">
             <div class="brand-block">
@@ -25,7 +26,8 @@
             <div class="department-label">Campus Safety</div>
 
             <nav class="nav-list">
-                <button class="nav-button active" data-view="loadout-view">Technician Loadout</button>
+                <button class="nav-button active" data-view="home-view">Home</button>
+                <button class="nav-button" data-view="loadout-view">Technician Loadout</button>
                 <button class="nav-button" data-view="team-view">Team View</button>
                 <button class="nav-button" data-view="inventory-view">Inventory</button>
                 <button class="nav-button" data-view="export-view">Excel Export</button>
@@ -35,6 +37,7 @@
 
             <button class="nav-button muted" id="reset-demo-button">Reset Demo Data</button>
             <div class="prototype-badge">Larimer Campus Prototype</div>
+            <div class="brand-placeholder-note">Approved FRCC logo artwork can replace the temporary FRCC text mark when the official asset file is added.</div>
         </aside>
 
         <div class="workspace">
@@ -65,7 +68,97 @@
             <div id="permission-banner" class="permission-banner" aria-live="polite"></div>
 
             <main class="main-content">
-                <section id="loadout-view" class="view active-view" aria-labelledby="loadout-title">
+                <section id="home-view" class="view active-view" aria-labelledby="home-title">
+                    <section class="home-hero">
+                        <div class="home-hero-copy">
+                            <span class="home-kicker">Proof of Concept · Larimer Campus</span>
+                            <h2 id="home-title">Campus Safety Equipment Dashboard</h2>
+                            <p>A videogame-inspired equipment management concept designed to make technician loadouts, team readiness, inventory status, and equipment assignments easier to understand at a glance.</p>
+
+                            <div class="home-actions">
+                                <button class="button gold" id="home-start-demo">Start Demo</button>
+                                <button class="button primary" data-home-view="loadout-view">Open Technician Loadout</button>
+                                <button class="button secondary" data-home-view="team-view">View Larimer Team</button>
+                            </div>
+                        </div>
+
+                        <aside class="home-status-card" aria-label="Prototype status">
+                            <div>
+                                <p class="eyebrow">Live Prototype</p>
+                                <h3>Demo Status</h3>
+                                <div class="home-status-list">
+                                    <div class="home-status-row"><span>Demo role</span><strong id="home-role-value">Supervisor</strong></div>
+                                    <div class="home-status-row"><span>Viewing</span><strong id="home-tech-value">Jordan Davis</strong></div>
+                                    <div class="home-status-row"><span>Inventory</span><strong id="home-inventory-value">—</strong></div>
+                                    <div class="home-status-row"><span>Build</span><strong id="home-build-value">0.9.0</strong></div>
+                                </div>
+                            </div>
+                            <div class="home-prototype-note">This demonstration uses fictional or sanitized data and local browser storage only. It is not connected to live FRCC personnel, access-control, or inventory systems.</div>
+                        </aside>
+                    </section>
+
+                    <div class="home-stats" aria-label="Prototype summary">
+                        <div class="home-stat"><strong id="home-filled-count">—</strong><span>Filled Team Positions</span></div>
+                        <div class="home-stat"><strong id="home-open-count">—</strong><span>Open Positions</span></div>
+                        <div class="home-stat"><strong id="home-available-count">—</strong><span>Available Inventory Items</span></div>
+                        <div class="home-stat"><strong id="home-loadout-count">—</strong><span>Saved Prototype Loadouts</span></div>
+                    </div>
+
+                    <section class="home-section">
+                        <div class="home-section-heading">
+                            <div>
+                                <h3>Explore the Prototype</h3>
+                                <p>Each section demonstrates a different part of the proposed equipment-management workflow.</p>
+                            </div>
+                        </div>
+
+                        <div class="home-feature-grid">
+                            <article class="home-feature-card">
+                                <div class="home-feature-icon">LOAD</div>
+                                <h4>Technician Loadout</h4>
+                                <p>Select equipment, preview changes on the mannequin, arrange duty-belt positions, and save issued or hypothetical loadouts.</p>
+                                <button data-home-view="loadout-view">Open Loadout →</button>
+                            </article>
+
+                            <article class="home-feature-card">
+                                <div class="home-feature-icon">TEAM</div>
+                                <h4>Larimer Team View</h4>
+                                <p>See the whole team standing together, including Supervisor and Technician IV placement, active loadouts, duty status, and open positions.</p>
+                                <button data-home-view="team-view">Open Team View →</button>
+                            </article>
+
+                            <article class="home-feature-card">
+                                <div class="home-feature-icon">INV</div>
+                                <h4>Inventory</h4>
+                                <p>Review prototype asset IDs, condition, assignment status, available spares, and equipment currently unavailable for assignment.</p>
+                                <button data-home-view="inventory-view">Open Inventory →</button>
+                            </article>
+
+                            <article class="home-feature-card">
+                                <div class="home-feature-icon">XLSX</div>
+                                <h4>Excel Reporting</h4>
+                                <p>Generate downloadable Excel workbooks for inventory, technician loadouts, and the Larimer team directly in the browser.</p>
+                                <button data-home-view="export-view">Open Excel Export →</button>
+                            </article>
+                        </div>
+                    </section>
+
+                    <section class="home-section demo-walkthrough">
+                        <div class="demo-walkthrough-copy">
+                            <p class="eyebrow">Suggested presentation flow</p>
+                            <h3>A quick FireFly demonstration</h3>
+                            <p>This sequence highlights the core proof-of-concept without requiring someone to understand the prototype before they begin.</p>
+                        </div>
+                        <div class="demo-steps">
+                            <div class="demo-step"><div class="demo-step-number">1</div><div><strong>Start in Supervisor mode.</strong><span>Show how a supervisor can view and edit the entire Larimer team while other demo roles have narrower permissions.</span></div></div>
+                            <div class="demo-step"><div class="demo-step-number">2</div><div><strong>Open a technician loadout.</strong><span>Swap a hat or equipment item, move belt gear to another clock position, and show that nothing changes in inventory until Save Loadout is used.</span></div></div>
+                            <div class="demo-step"><div class="demo-step-number">3</div><div><strong>Switch to Team View.</strong><span>Show the Supervisor centered, Technician IV to the Supervisor's right, Technician IIIs balanced around them, and open positions at the end.</span></div></div>
+                            <div class="demo-step"><div class="demo-step-number">4</div><div><strong>Export a report.</strong><span>Generate the Full Prototype Workbook to demonstrate how the visual interface can still produce traditional equipment records.</span></div></div>
+                        </div>
+                    </section>
+                </section>
+
+                <section id="loadout-view" class="view" aria-labelledby="loadout-title">
                     <div class="section-heading">
                         <div>
                             <p class="eyebrow">Individual equipment</p>
@@ -254,18 +347,19 @@
 
             <footer class="footer">
                 <span>FRCC Campus Safety Equipment Dashboard</span>
-                <span>Proof of Concept · Local demo data only · Build 0.8.0</span>
+                <span>Proof of Concept · Local demo data only · Build 0.9.0</span>
             </footer>
         </div>
     </div>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-    <script src="data.js?v=0.8.0"></script>
-    <script src="app.js?v=0.8.0"></script>
-    <script src="team.js?v=0.8.0"></script>
-    <script src="permissions.js?v=0.8.0"></script>
+    <script src="data.js?v=0.9.0"></script>
+    <script src="app.js?v=0.9.0"></script>
+    <script src="team.js?v=0.9.0"></script>
+    <script src="permissions.js?v=0.9.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-    <script src="export.js?v=0.8.0"></script>
+    <script src="export.js?v=0.9.0"></script>
+    <script src="home.js?v=0.9.0"></script>
 </body>
 </html>
