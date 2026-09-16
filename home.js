@@ -535,7 +535,6 @@ async function startAutomatedDemo() {
         if (autoDemoProgress) autoDemoProgress.style.width = '100%';
         if (autoDemoStepLabel) autoDemoStepLabel.textContent = 'Demo complete';
         if (autoDemoStatus) autoDemoStatus.textContent = 'Automated Demo Loadout is available for review. Starting the demo again will replace it rather than creating another copy.';
-        if (autoDemoStopButton) autoDemoStopButton.textContent = 'Close';
         await waitForDemo(2200);
     } catch (error) {
         if (error?.message !== 'AUTO_DEMO_CANCELLED') {
@@ -549,7 +548,6 @@ async function startAutomatedDemo() {
 
 function finishAutomatedDemo() {
     autoDemoRunning = false;
-    autoDemoCancelled = false;
     document.body.classList.remove('auto-demo-running');
     clearDemoFocus();
     autoDemoCursor?.classList.remove('visible');
